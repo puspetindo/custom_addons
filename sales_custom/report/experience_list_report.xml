@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_report_experience_list" model="ir.actions.report">
+        <field name="name">Experience List Report</field>
+        <field name="model">sales_custom.experience_list</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_custom.report_experience_list_template</field>
+        <field name="report_file">sales_custom.report_experience_list_template</field>
+        <field name="print_report_name">'Experience List - %s' % (object.display_name)</field>
+        <field name="binding_model_id" ref="model_sales_custom_experience_list"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Excel Report Action -->
+    <record id="action_report_experience_list_excel" model="ir.actions.report">
+        <field name="name">Experience List Excel</field>
+        <field name="model">sales_custom.experience_list</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">sales_custom.experience_list_xlsx</field>
+        <field name="report_file">sales_custom.experience_list_xlsx</field>
+        <field name="print_report_name">'Experience List - %s' % (object.display_name)</field>
+        <field name="binding_model_id" ref="model_sales_custom_experience_list"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

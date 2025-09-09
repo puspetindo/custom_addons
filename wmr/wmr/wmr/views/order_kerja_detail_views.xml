@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_order_kerja_detail_list" model="ir.ui.view">
+        <field name="name">order.kerja.detail.list</field>
+        <field name="model">order.kerja.detail</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="revisi"/>
+                <field name="jenis_pekerjaan"/>
+                <field name="uraian_pekerjaan"/>
+                <field name="kel_biaya"/>
+                <field name="cost_c"/>
+                <field name="no_internal_pok"/>
+                <field name="qty"/>
+                <field name="satuan"/>
+                <field name="harga_satuan"/>
+                <field name="jumlah_total" readonly="1"/>
+                <field name="order_kerja_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW DETAIL -->
+    <record id="view_order_kerja_detail_form" model="ir.ui.view">
+        <field name="name">order.kerja.detail.form</field>
+        <field name="model">order.kerja.detail</field>
+        <field name="arch" type="xml">
+            <form string="Detail Pekerjaan">
+                <sheet>
+                    <field name="order_kerja_id" readonly="1" invisible="1"/>
+                    <group>
+                        <field name="revisi"/>
+                        <field name="jenis_pekerjaan"/>
+                        <field name="uraian_pekerjaan"/>
+                        <field name="kel_biaya"/>
+                    </group>
+                    <group string="No. Internal">
+                        <field name="cost_c"/>
+                        <field name="no_internal_pok"/>
+                        <field name="pok_with_cost" invisible="1"></field>
+                    </group>
+                    <group string="Jumlah">
+                        <field name="qty"/>
+                        <field name="satuan"/>
+                    </group>
+                    <group string="Harga">
+                        <field name="harga_satuan"/>
+                        <field name="jumlah_total" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION DETAIL -->
+    <record id="action_order_kerja_detail" model="ir.actions.act_window">
+        <field name="name">Detail Order Kerja</field>
+        <field name="res_model">order.kerja.detail</field>
+        <field name="view_mode">form,list</field>
+    </record>
+
+</odoo>

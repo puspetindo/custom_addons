@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FORM View untuk Product Spesification -->
+    <record id="view_product_spesification_form" model="ir.ui.view">
+        <field name="name">product.spesification.form</field>
+        <field name="model">product.spesification</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Nama Spesifikasi"/>
+                            <field name="kode_ktg" string="Kode Kategori"/>
+                            <field name="kategori" string="Kategori"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST View untuk Product spesification -->
+    <record id="view_product_spesification_list" model="ir.ui.view">
+        <field name="name">product.spesification.list</field>
+        <field name="model">product.spesification</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" string="Nama Spesifikasi"/>
+                <field name="kode_ktg" string="Kode Kategori"/>
+                <field name="kategori" string="Kategori"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- SEARCH View untuk Product Spesification -->
+    <record id="view_product_spesification_search" model="ir.ui.view">
+        <field name="name">product.spesification.search</field>
+        <field name="model">product.spesification</field>
+        <field name="arch" type="xml">
+            <search string="Cari Spesifikasi Produk">
+                <field name="name"/>
+                <field name="kode_ktg"/>
+                <field name="kategori"/>
+                <group expand="0" string="Kelompokkan Berdasarkan">
+                    <filter string="Kategori" name="groupby_kategori" domain="[]" context="{'group_by': 'kategori'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action untuk membuka Product spesification -->
+    <record id="action_product_specification" model="ir.actions.act_window">
+        <field name="name">Spesifikasi Produk</field>
+        <field name="res_model">product.spesification</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_product_spesification_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat spesifikasi produk baru
+            </p>
+        </field>
+    </record>
+</odoo> 

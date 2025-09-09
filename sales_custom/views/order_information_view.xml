@@ -1,0 +1,124 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_order_information_tree" model="ir.ui.view">
+        <field name="name">sales.custom.order.information.tree</field>
+        <field name="model">sales_custom.order_information</field>
+        <field name="arch" type="xml">
+            <list string="Order Information List">
+                <field name="job_order_no"/>
+                <field name="customer_id"/>
+                <field name="project"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_order_information_form" model="ir.ui.view">
+        <field name="name">sales.custom.order.information.form</field>
+        <field name="model">sales_custom.order_information</field>
+        <field name="arch" type="xml">
+            <form string="Order Information">   
+                <h1>Order Information Job Equipment</h1>
+                <header>
+                    <button name="action_revise" string="Revisi" type="object" class="oe_highlight" invisible="not id or status == 'closed'"/>
+                    <button name="action_close" string="Close" type="object" class="oe_highlight" invisible="not id or status == 'closed'"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="status" readonly="1"/>
+                        <field name="close_date" readonly="1"/>
+                        <field name="bast_number" readonly="1"/>
+                        <field name="job_order_no"/>
+                        <field name="distribution_to"/>
+                        <field name="revision"/>
+                        <field name="revision_date" readonly="1" widget="date" invisible="revision == 0"/>
+                        <field name="date"/>
+                    </group>
+
+                    <!-- Job Reference Fields -->
+                    <group string="JOB REFERENCE">
+                        <field name="inquiry_no"/>
+                        <field name="date_1"/>
+                        <field name="quotation_no"/>
+                        <field name="date_2"/>
+                        <field name="loiloa_no"/>
+                        <field name="date_3"/>
+                        <field name="pospk_no"/>
+                        <field name="date_4"/>
+                    </group>
+
+                    <!-- Project Title -->
+                    <group string="1. PROJECT TITLE">
+                        <field name="customer_id"/>
+                        <field name="project"/>
+                    </group>
+
+                    <!-- Item To Be Purchased -->
+                    <group string="2. ITEM TO BE PURCHASED">
+                        <field name="item_purchased" context="{'default_order_id': id}"
+                        domain="[('order_id', '=', id)]" widget="one2many_list"/>
+                    </group>
+                    
+                    <!-- SCOPE OF WORK & SUPPLY -->
+                     <group string="3. SCOPE OF WORK &amp; SUPPLY">
+                        <field name="scope_division_ids" context="{'default_order_id': id}"
+                               domain="[('order_id', '=', id)]"
+                               nolabel="1"
+                               mode="list,form"
+                               options="{'no_create': True, 'no_create_edit': True, 'no_delete': True}"/>
+                     </group>
+
+
+
+                    <!-- Special Note -->
+                    <group string="4. SPECIAL NOTE">
+                        <field name="special_note"/>
+                    </group>
+
+                    <!-- Attached Documents -->
+                    <group string="5. ATTACHED DOCUMENTS" col="2">
+                        <field name="loiloa"/>
+                        <field name="purchase_order"/>
+                        <field name="change_order"/>
+                        <field name="applicable_documents_list"/>
+                        <field name="time_schedule"/>
+                        <field name="scope_of_work_supply"/>
+                        <field name="ceb"/>
+                        <field name="clarification_record_of_contract"/>
+                        <field name="other_mom_list_of_equipment"/>
+                    </group>
+
+                    <!--Others-->
+                    <group string="Others">
+                        <field name="stamp"/>
+                        <field name="sertifikasi"/>
+                        <field name="delivery_input"/>
+                        <field name="value_usd"/>
+                        <field name="value_idr"/>
+                    </group>
+
+                    <!-- Signature -->
+                    <group string="Signature">
+                        <field name="tanda_tangan" widget="signature" required="1"/>
+                        <field name="by"/>
+                        <field name="title"/>
+                    </group>
+                </sheet>
+              
+                <footer>
+                    <button name="print_order_information_report" string="Print Order Information" type="object" class="btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_report_order_information" model="ir.actions.report">
+        <field name="name">Order Information Report</field>
+        <field name="model">sales_custom.order_information</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sales_custom.order_information_report_template</field>
+        <field name="print_report_name">'Order_Information_' + (object.job_order_no or '')</field>
+        <field name="binding_model_id" ref="model_sales_custom_order_information"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

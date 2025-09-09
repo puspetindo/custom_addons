@@ -1,0 +1,103 @@
+<odoo>
+    <!-- Menu Utama untuk Sales Custom -->
+    <menuitem id="sales_custom_menu_root" name="Sales Custom" sequence="1"/>
+
+    <!-- Menu untuk Order Information -->
+    <menuitem id="menu_oi"
+              name="Order Information"
+              parent="sales_custom_menu_root"
+              sequence="10"/>
+
+    <!-- Menu untuk Order Information JE-->
+    <menuitem id="menu_oi_je"
+              name="Order Information JE"
+              parent="menu_oi"
+              sequence="11"/>
+
+    <!-- Menu untuk Order Information -->
+    <menuitem id="menu_order_information"
+              name="Form OI JE"
+              parent="menu_oi"
+              action="action_order_information"
+              sequence="12"/>
+    
+    <!-- Menu untuk Job Item -->
+    <menuitem id="menu_job_item"
+              name="Data Job Item JE"
+              parent="menu_oi"
+              action="action_job_item"
+              sequence="12"/>
+
+    <!-- Menu untuk Order Information JS-->
+    <menuitem id="menu_oi_js"
+              name="Order Information JS"
+              parent="sales_custom_menu_root"
+              sequence="20"/>
+
+    <!-- Menu untuk Form JS -->
+    <menuitem id="menu_form_oi_js"
+              name="Form OI JS"
+              parent="menu_oi_js"
+              action="action_oi_js"
+              sequence="21"/>
+    
+    <!-- Menu untuk Job Item JS -->
+    <menuitem id="menu_job_item_js"
+              name="Data Job Item JS"
+              parent="menu_oi_js"
+              action="action_job_item_js"
+              sequence="22"/>
+    
+    <!-- Menu untuk Order Information List -->
+    <menuitem id="menu_list"
+              name="List"
+              parent="sales_custom_menu_root"
+              sequence="30"/>
+    
+    <!-- Menu untuk Order Information List -->
+    <menuitem 
+        id="menu_order_information_list"
+        name="Daftar Project JE"
+        parent="menu_list"
+        action="action_order_information_list"
+        sequence="31"/>
+
+    <menuitem id="menu_experience_list"
+              name="Experience List JE" 
+              parent="menu_list"
+              action="action_experience_list"
+              sequence="32"/>
+    
+    <menuitem id="menu_oi_js_list"
+              name="Daftar Project JS"
+              parent="menu_list"
+              action="action_oi_js_list"
+              sequence="33"/>
+    
+    <menuitem id="menu_experience_list_js"
+              name="Experience List JS" 
+              parent="menu_list"
+              action="action_experience_list_js"
+              sequence="34"/>
+
+    <!-- Menu untuk Division -->
+    <menuitem id="menu_division" 
+              name="Divisi"
+              parent="sales_custom_menu_root"
+              sequence="40"/>
+    
+    <!-- Menu untuk Scope Of Work and Supply-->
+    <menuitem id="menu_scope_remarks" 
+              name="Data Divisi"
+              parent="menu_division" 
+              action="action_scope_remarks"
+              sequence="41"/>
+              
+    <!-- Menu untuk Division -->
+    <menuitem id="menu_scope_division" 
+              name="Remarks"
+              parent="menu_division" 
+              action="action_scope_division" 
+              sequence="42"/>
+
+</odoo>

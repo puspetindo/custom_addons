@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Paper Format -->
+        <record id="paperformat_wmr_landscape" model="report.paperformat">
+            <field name="name">WMR Landscape Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Action Report -->
+        <record id="action_wmr_report" model="ir.actions.report">
+            <field name="name">Welding Material Requisition</field>
+            <field name="model">wmr.wmr_form</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">wmr.wmr_report_template</field>
+            <field name="report_file">wmr.wmr_report_template</field>
+            <field name="print_report_name">'WMR - %s' % (object.document_number or 'N/A')</field>
+            <field name="paperformat_id" ref="paperformat_wmr_landscape"/>
+            <field name="binding_model_id" ref="model_wmr_wmr_form"/>
+        </record>
+    </data>
+</odoo>

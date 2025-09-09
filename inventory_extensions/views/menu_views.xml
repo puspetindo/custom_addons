@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root menu untuk Product Dimensions dan Specifications -->
+    <menuitem id="menu_inventory_extensions_root" name="Product Extensions" parent="stock.menu_stock_config_settings" sequence="100"/>
+
+    <!-- Sub menu untuk list dimensi produk -->
+    <menuitem id="menu_product_dimension" name="Dimensi Produk" parent="menu_inventory_extensions_root" action="action_product_dimension" sequence="10"/>
+
+    <!-- Sub menu untuk list spesifikasi produk -->
+    <menuitem id="menu_product_specification" name="Spesifikasi Produk" parent="menu_inventory_extensions_root" action="action_product_specification" sequence="20"/>
+
+    <menuitem id="menu_product_satuan" name="Satuan Produk" parent="menu_inventory_extensions_root" action="action_product_satuan" sequence="30"/>
+
+    <menuitem id="menu_laporan_penerimaan_barang" name="Laporan Penerimaan Barang" parent="stock.menu_stock_warehouse_mgmt" action="action_laporan_penerimaan_barang"/>
+</odoo>

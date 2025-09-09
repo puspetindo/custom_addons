@@ -1,0 +1,269 @@
+<odoo>
+    <data>
+        <template id="report_perincian_pembayaran_style" name="template_name">
+            <style>
+                .info-box {
+                margin-bottom: 10px;
+                white-space: nowrap;
+                }
+                .label-box {
+                display: inline-block;
+                width: 160px;
+                font-weight: bold;
+                font-size: 14px;
+                }
+            </style>
+        </template>
+
+        <template id="report_perincian_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <div style="text-align:center;">
+                            <h2 style="font-size: 20px; margin-bottom: 20px;">PERINCIAN PEMBAYARAN</h2>
+                        </div>
+                        <table width="100%" style="font-size:14px;">
+                            <tr>
+                                <td width="50%">
+                                    <div class="info-box">
+                                        <span class="label-box">Dibayarkan Kepada</span>
+                                        <span>: <span t-field="doc.partner_id.name" /></span>
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">Jumlah Dibayarkan</span>
+                                        <span>: <span
+                                                t-esc="doc.amount_paid and 'Rp {:,.0f}'.format(doc.amount_paid).replace(',', '.') or 'Rp 0'" /></span>
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">No. PO/OK/SPK/Surat/Memo</span>
+                                        <span>: <span t-field="doc.source_document_ref" /></span>
+                                    </div>
+                                </td>
+                                <td width="50%" style="text-align: right; vertical-align: top;">
+                                    <div class="info-box">
+                                        <span t-field="doc.name"
+                                            style="font-size:18px; font-weight: bold;" />
+                                    </div>
+                                    <div class="info-box">
+                                        <span t-field="doc.journal_entry_ref" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h4 style="margin-top:20px; margin-bottom: 10px; font-size: 16px;">Berdasarkan Bukti - bukti
+                            Terlampir</h4>
+                        <table width="100%" style="font-size:14px; border-collapse: collapse;"
+                            border="1" cellspacing="0" cellpadding="5">
+                            <thead>
+                                <tr>
+                                    <th width="5%" class="text-center">No</th>
+                                    <th class="text-center">Keterangan</th>
+                                    <th width="30%" class="text-center">Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="doc.line_ids">
+                                    <tr>
+                                        <td t-att-rowspan="len(doc.line_ids) + 3"
+                                            style="vertical-align: top; text-align: center;">
+                                            <span>1</span>
+                                        </td>
+                                        <td>
+                                            <span t-field="doc.line_ids[0].name" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-esc="doc.line_ids[0].amount and 'Rp {:,.0f}'.format(doc.line_ids[0].amount).replace(',', '.') or 'Rp 0'" />
+                                        </td>
+                                    </tr>
+                                    <tr t-foreach="doc.line_ids[1:]" t-as="line">
+                                        <td>
+                                            <span t-field="line.name" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-esc="line.amount and 'Rp {:,.0f}'.format(line.amount).replace(',', '.') or 'Rp 0'" />
+                                        </td>
+                                    </tr>
+                                </t>
+                                <tr style="font-weight: bold;">
+                                    <td>
+                                        <strong>Jumlah Bersih</strong>
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="doc.amount_total_net and 'Rp {:,.0f}'.format(doc.amount_total_net).replace(',', '.') or 'Rp 0'" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <h4 style="margin: 0; padding: 5px 0; font-size: 16px;">Ket : <span
+                                                t-field="doc.notes" /></h4>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table width="100%"
+                            style="font-size:14px; border-collapse: collapse; margin-top: 0; border-top: none;"
+                            border="1" cellspacing="0" cellpadding="5">
+                            <tbody>
+                                <tr>
+                                    <td width="5%" rowspan="10"
+                                        style="vertical-align: top; text-align:center; border-top: 1px solid black;">
+                                        <strong>2</strong>
+                                    </td>
+                                    <td colspan="2" style="border-top: 1px solid black;">
+                                        <strong>Kelengkapan Dokumen</strong>
+                                    </td>
+                                    <td style="border-top: 1px solid black;">
+                                        <strong>No. Referensi</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="45%">
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_memo_attached or None" />
+                                        <span>Memo / Surat / Disposisi</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>
+                                        <span t-field="doc.memo_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_invoice_attached or None" />
+                                        <span>Kwitansi / Invoice / Nota</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>
+                                        <span t-field="doc.invoice_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_tax_invoice_attached or None" />
+                                        <span>Faktur Pajak</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>
+                                        <span t-field="doc.tax_invoice_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_po_attached or None" />
+                                        <span>PO / OK / SPK</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>
+                                        <span t-field="doc.po_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_late_fee_doc_attached or None" />
+                                        <span>Denda Keterlambatan</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_lpb_attached or None" />
+                                        <span>LPB</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>
+                                        <span t-field="doc.lpb_ref" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_ba_attached or None" />
+                                        <span>Berita Acara</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_delivery_note_attached or None" />
+                                        <span>Surat Jalan / B / L / P / AWB</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>-</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox"
+                                            t-att-checked="doc.is_other_doc_attached or None" />
+                                        <span>Lain - lain</span>
+                                    </td>
+                                    <td>Asli / Copy</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="text-align:right; font-size:14px; margin-top:10px;">
+                            <span>Gresik, <span t-field="doc.today_date"
+                                    t-options='{"format": "d MMMM y"}' /></span>
+                        </div>
+                        <table width="100%"
+                            style="font-size:14px; text-align:center; margin-top:10px;">
+                            <tr>
+                                <td width="33%">Dibuat,</td>
+                                <td width="33%">Diperiksa,</td>
+                                <td width="34%">Diketahui,</td>
+                            </tr>
+                            <tr>
+                                <td style="height: 80px; vertical-align:bottom;">
+                                    <img t-if="doc.verifier_signature"
+                                        t-att-src="image_data_uri(doc.verifier_signature)"
+                                        style="max-height: 80px; max-width: 150px;" />
+                                </td>
+                                <td style="height: 80px; vertical-align:bottom;">
+                                    <img t-if="doc.tax_checker_signature"
+                                        t-att-src="image_data_uri(doc.tax_checker_signature)"
+                                        style="max-height: 80px; max-width: 150px;" />
+                                </td>
+                                <td style="height: 80px; vertical-align:bottom;">
+                                    <img t-if="doc.accounting_approver_signature"
+                                        t-att-src="image_data_uri(doc.accounting_approver_signature)"
+                                        style="max-height: 80px; max-width: 150px;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span t-field="doc.verifier_user_id.name" />
+                                    <br />
+                                    <span>Verifikator</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.tax_checker_user_id.name" />
+                                    <br />
+                                    <span>Pajak</span>
+                                </td>
+                                <td>
+                                    <span t-field="doc.accounting_approver_user_id.name" />
+                                    <br />
+                                    <span>Akuntansi &amp; Keuangan</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Unified Form for Job Item -->
+        <record id="view_job_item_form" model="ir.ui.view">
+            <field name="name">Job Item Form</field>
+            <field name="model">sales_custom.job_item</field>
+            <field name="arch" type="xml">
+                <form string="Job Item">
+                    <sheet>
+                        <group>
+                            <field name="type" />
+                            <field name="item_no"/>
+                            <field name="name"/>
+                            <field name="number"/>
+                            <field name="material"/>
+                            <field name="diameter"/>
+                            <field name="thk" />
+                            <field name="length"/>
+                            <field name="weight_ton"/>
+                            <field name="qty"/>
+                            <!-- <field name="combo"/> -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Unified List for Job Item -->
+        <record id="view_job_item_list" model="ir.ui.view">
+            <field name="name">Job Item List</field>
+            <field name="model">sales_custom.job_item</field>
+            <field name="arch" type="xml">
+                <list string="Job Items">
+                    <field name="sequence" readonly="1"/>
+                    <field name="item_no"/>
+                    <field name="type"/>
+                    <field name="name"/>
+                    <field name="number"/>
+                    <field name="material"/>
+                    <field name="diameter"/>
+                    <field name="thk"/>
+                    <field name="length"/>
+                    <field name="weight_ton"/>
+                    <field name="qty"/>
+                </list>
+            </field>
+        </record>
+
+    </data>
+</odoo>

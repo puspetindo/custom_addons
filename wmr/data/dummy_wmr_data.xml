@@ -1,0 +1,18 @@
+<odoo>
+    <data noupdate="1">
+        <record id="dummy_wmr_1" model="wmr.wmr_form">
+            <field name="document_number">WMR001</field>
+            <field name="job_number_id" ref="sales_custom.order_information_1"/> <!-- Replace with actual reference -->
+            <field name="job_item_no" ref="sales_custom.job_item_1"/> <!-- Replace with actual reference -->
+            <field name="amount" eval="500.0"/>
+            <field name="state">draft</field>
+        </record>
+        <record id="dummy_wmr_2" model="wmr.wmr_form">
+            <field name="document_number">WMR002</field>
+            <field name="job_number_id" ref="sales_custom.order_information_2"/> <!-- Replace with actual reference -->
+            <field name="job_item_no" ref="sales_custom.job_item_2"/> <!-- Replace with actual reference -->
+            <field name="amount" eval="750.0"/>
+            <field name="state">draft</field>
+        </record>
+    </data>
+</odoo>

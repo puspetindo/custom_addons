@@ -1,0 +1,123 @@
+<odoo>
+    <record id="view_form_pok_form" model="ir.ui.view">
+        <field name="name">pok.form.form</field>
+        <field name="model">pok.form</field>
+        <field name="arch" type="xml">
+            <form string="Permintaan Order Kerja" class="oe_form_nocontent">
+                <header>
+                    <button name="print_pok_report" string="Print POK Report" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="number_form"/>
+                            <field name="tanggal_input"/>
+                            <field name="ref_pok"/>
+                            <field name="revision_count"/>
+                        </group>
+                        <group>
+                            <field name="from_dept"/>
+                            <field name="to_dept"/>
+                            <field name="tipe_pusat_biaya" required="1" placeholder="Pilih Tipe Pusat Biaya"/>
+                            <field name="pusat_biaya_je" invisible="tipe_pusat_biaya != 'je'" required="tipe_pusat_biaya == 'je'"/>
+                            <field name="pusat_biaya_dept" invisible="tipe_pusat_biaya != 'dept'" required="tipe_pusat_biaya == 'dept'"/>
+                            <field name="kode_dept" invisible="true"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="list_pok" widget="one2many_list">
+                            <list string="Detail Pekerjaan">
+                                <field name="deskripsi"/>
+                                <field name="tipe"/>
+                                <field name="kode"/>
+                                <field name="tanggal_rencana"/>
+                                <field name="target_selesai"/>
+                                <field name="tanggal_selesai"/>
+                                <field name="penjelasan"/>
+                            </list>
+                        </field>
+                    </group>
+
+                    <group>
+                        <field name="disposisi" colspan="2"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Peminta Order">
+                            <group col="3">
+                                <group string="Dibuat">
+                                    <field name="nama_dibuat" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_dibuat" placeholder="Pilih Tanggal"/>
+                                    <field name="ttd_dibuat" widget="signature"/>
+                                </group>
+                                <group string="Diperiksa">
+                                    <field name="nama_diperiksa" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_diperiksa" placeholder="Pilih Tanggal"/>
+                                    <field name="ttd_diperiksa" widget="signature"/>
+                                </group>
+                                <group string="Disetujui">
+                                    <field name="nama_disetujui" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_disetujui" placeholder="Pilih Tanggal"/>
+                                    <field name="ttd_disetujui" widget="signature"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Procurement">
+                            <group col="3">
+                                <group string="Diterima">
+                                    <field name="nama_penerima" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_diterima" placeholder="PilihTanggal"/>
+                                    <field name="ttd_diterima" widget="signature"/>
+                                </group>
+                                <group string="Disetujui">
+                                    <field name="nama_disetujui_2" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_disetujui_2" placeholder="Pilih Tanggal"/>
+                                    <field name="ttd_disetujui_2" widget="signature"/>
+                                </group>
+                                <group string="Diselesaikan">
+                                    <field name="nama_diselesaikan" placeholder="Masukkan Nama"/>
+                                    <field name="tanggal_diselesaikan" placeholder="Pilih Tanggal"/>
+                                    <field name="ttd_diselesaikan" widget="signature"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Penerima">
+                            <group name="Diterima" col="3">
+                                <field name="nama_penerima_1" placeholder="Masukkan Nama"/>
+                                <field name="tanggal_diterima_1" placeholder="Pilih Tanggal"/>
+                                <field name="ttd_diterima_1" widget="signature"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_pok_form" model="ir.ui.view">
+        <field name="name">pok.form.list</field>
+        <field name="model">pok.form</field>
+        <field name="arch" type="xml">
+            <list string="Form POK" class="oe_view_nocontent">
+                <field name="number_form"/>
+                <field name="tanggal_input"/>
+                <field name="ref_pok"/>
+                <field name="revision_count" optional="show"/>
+                <field name="from_dept"/>
+                <field name="to_dept"/>
+                <field name="tipe_pusat_biaya" optional="show"/>
+                <field name="pusat_biaya_je" optional="show"/>
+                <field name="pusat_biaya_dept" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_pok_form" model="ir.actions.act_window">
+        <field name="name">Form POK</field>
+        <field name="res_model">pok.form</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

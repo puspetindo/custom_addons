@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record id="view_scope_remarks_form" model="ir.ui.view">
+            <field name="name">scope.remarks.form</field>
+            <field name="model">sales_custom.scope_remarks</field>
+            <field name="arch" type="xml">
+                <form string="Scope Remarks">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="nomor"/>
+                            <field name="active"/>
+                            <button name="action_archive" string="Archive" type="object" class="btn-secondary" invisible="['|', ('active', '=', False), ('active', '=', False)]"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- List View -->
+        <record id="view_scope_remarks_list" model="ir.ui.view">
+            <field name="name">scope.remarks.tree</field>
+            <field name="model">sales_custom.scope_remarks</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="nomor"/>
+                    <field name="active"/>
+                    <button name="action_archive" string="Archive" type="object" class="btn-secondary" invisible="['|', ('active', '=', False), ('active', '=', False)]"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

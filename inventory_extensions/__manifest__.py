@@ -1,0 +1,22 @@
+{
+    'name': 'Inventory Extensions',
+    'version': '1.0',
+    'summary': 'Add specification and dimension fields to products',
+    'author': 'Odoo Developer',
+    'category': 'Inventory/Inventory',
+    'depends': ['stock', 'product'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/product_spesification_views.xml',
+        'views/product_dimension_views.xml',
+        'views/product_sequence.xml',
+        'views/product_satuan.xml',
+        'views/product_template_views.xml',
+        'views/laporan_penerimaan_barang.xml',
+        'views/menu_views.xml',
+        'views/deduplicate_spesification_wizard_view.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+} 

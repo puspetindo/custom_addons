@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_product_satuan_list" model="ir.ui.view">
+        <field name="name">product.satuan.tree</field>
+        <field name="model">product.satuan</field>
+        <field name="arch" type="xml">
+            <list string="Daftar Satuan Produk">
+                <field name="nama_satuan"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_product_satuan_form" model="ir.ui.view">
+        <field name="name">product.satuan.form</field>
+        <field name="model">product.satuan</field>
+        <field name="arch" type="xml">
+            <form string="Form Satuan Produk">
+                <sheet>
+                    <group>
+                        <field name="nama_satuan"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_product_satuan" model="ir.actions.act_window">
+        <field name="name">Satuan Produk</field>
+        <field name="res_model">product.satuan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat satuan produk di sini.
+            </p>
+        </field>
+    </record>
+</odoo>

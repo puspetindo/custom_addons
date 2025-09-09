@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Tree View (no inline editing) -->
+        <record id="view_scope_division_list" model="ir.ui.view">
+            <field name="name">scope.division.tree</field>
+            <field name="model">sales_custom.scope_division</field>
+            <field name="type">list</field>
+            <field name="arch" type="xml">
+                <list string="Scope Division" create="false" delete="false">
+                    <field name="remarks" string="Description"/>
+                    <field name="detail_scope" string ="Detail Scope of Work &amp; Supply"/>
+                    <field name="division" string ="Remarks"/>
+                </list>
+            </field>
+        </record>
+    </data>
+</odoo>

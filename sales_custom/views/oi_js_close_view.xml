@@ -1,0 +1,34 @@
+<odoo>
+    <!-- View untuk wizard -->
+    <record id="view_order_information_js_close_form" model="ir.ui.view">
+        <field name="name">sales_custom.order_information_js.close.form</field>
+        <field name="model">sales_custom.order_information_js.close</field>
+        <field name="arch" type="xml">
+            <form string="Close Project JS">
+                <sheet>
+                    <group style="max-height: 300px; overflow-y: auto;">
+                        <field name="order_id" invisible="1"/>
+                        <div class="o_form_label">
+                            Silakan isi nomor BAST dan tanggal close untuk proyek JS ini:
+                        </div>
+                        <field name="bast_number" required="1"/>
+                        <field name="close_date" required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm_close" string="OK" type="object" class="btn-primary"/>
+                    <button name="action_cancel_close" string="Cancel" type="object" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action untuk buka popup -->
+    <record id="action_order_information_js_close" model="ir.actions.act_window">
+        <field name="name">Close Project JS</field>
+        <field name="res_model">sales_custom.order_information_js.close</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_order_information_js_close_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

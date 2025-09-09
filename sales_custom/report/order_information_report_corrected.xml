@@ -1,0 +1,297 @@
+<odoo>
+  <template id="order_information_report_template">
+    <t t-call="web.html_container">
+      <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="doc">
+          <div class="page" style="font-family: Arial, sans-serif; font-size: 10px; width: 210mm; margin:auto;">
+
+            <!-- HEADER -->
+            <table style="width:100%; margin-bottom:8px; border-collapse:separate;">
+              <tr>
+                <!-- Logo kiri -->
+                <td style="width:25%; text-align:left; vertical-align:middle; border:none;">
+                  <img t-att-src="'/sales_custom/static/src/image/logo.png'" 
+                       style="height:40px;"/>
+                </td>
+              
+                <!-- Judul tengah -->
+                <td style="width:50%; text-align:center; vertical-align:middle; font-weight:bold; font-size:16px; border:none;">
+                  ORDER INFORMATION
+                </td>
+              
+                <!-- Kosong kanan -->
+                <td style="width:25%; border:none"></td>
+              </tr>
+            </table>
+            
+            <!-- Job Order Info + Revision/Date sejajar -->
+            <table style="width:100%; margin-bottom:5px; border-collapse:separate;">
+              <tr>
+                <td style="width:20%; padding:2px; border:none; font-weight:bold;">Job Order No.</td>
+                <td style="width:30%; padding:2px; border:none;">
+                  : <span t-field="doc.job_order_no"/>
+                </td>
+                <td style="width:20%; padding:2px; border:none; font-weight:bold;">Revision</td>
+                <td style="width:30%; padding:2px; border:none;">
+                  : <span t-field="doc.revision"/>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:2px; border:none; font-weight:bold;">Distribution To</td>
+                <td style="padding:2px; border:none;">
+                  : <span t-field="doc.distribution_to"/>
+                </td>
+                <td style="padding:2px; border:none; font-weight:bold;">Date</td>
+                <td style="padding:2px; border:none;">
+                  : <span t-field="doc.date"/>
+                </td>
+              </tr>
+            </table>
+
+            <!-- JOB REFERENCE -->
+            <table style="width:100%; border:1px solid black; border-collapse:collapse; margin-bottom:10px; font-size:10px;">
+              <tr>
+                <th colspan="4" style="text-align:center; font-weight:bold; padding:4px; border:1px solid black; border-left:none; border-right:none;">
+                  JOB REFERENCE
+                </th>
+              </tr>
+            
+              <!-- Inquiry -->
+              <tr>
+                <td style="width:20%; padding:3px; border:none;">Inquiry No.</td>
+                <td style="width:30%; padding:3px; border:none;">
+                  : <span t-field="doc.inquiry_no"/>
+                </td>
+                <td style="width:10%; padding:3px; border:none;">Date</td>
+                <td style="width:40%; padding:3px; border:none;">
+                  : <span t-field="doc.date_1"/>
+                </td>
+              </tr>
+            
+              <!-- Quotation -->
+              <tr>
+                <td style="padding:3px; border:none;">Quotation No.</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.quotation_no"/>
+                </td>
+                <td style="padding:3px; border:none;">Date</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.date_2"/>
+                </td>
+              </tr>
+            
+              <!-- LOI/LOA -->
+              <tr>
+                <td style="padding:3px; border:none;">LOI/LOA No.</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.loiloa_no"/>
+                </td>
+                <td style="padding:3px; border:none;">Date</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.date_3"/>
+                </td>
+              </tr>
+            
+              <!-- PO/SPK -->
+              <tr>
+                <td style="padding:3px; border:none;">PO/SPK No.</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.pospk_no"/>
+                </td>
+                <td style="padding:3px; border:none;">Date</td>
+                <td style="padding:3px; border:none;">
+                  : <span t-field="doc.date_4"/>
+                </td>
+              </tr>
+            </table>  
+
+            <!-- PROJECT TITLE -->
+            <div style="font-weight:bold; margin-bottom:3px;">1. PROJECT TITLE</div>
+            <table style="width:100%; border:1px solid black; border-collapse:collapse; margin-bottom:10px;">
+              <tr>
+                <td style="padding:4px; border:1px solid black;"><strong>Customer</strong> : <span t-field="doc.customer_id"/></td>
+              </tr>
+              <tr>
+                <td style="padding:4px; border:1px solid black;"><strong>Project</strong> : <span t-field="doc.project"/></td>
+              </tr>
+            </table>
+
+            <!-- ITEM TO BE PURCHASED -->
+            <div style="font-weight:bold;">2. ITEM TO BE PURCHASED</div>
+            <table style="width:100%; border:1px solid black; border-collapse:collapse; margin-bottom:10px;">
+              <thead>
+                <tr style="background-color:#f2f2f2;">
+                  <th rowspan="2" style="border:1px solid black; width:5%; font-weight:bold">NO.</th>
+                  <th rowspan="2" style="border:1px solid black; width:15%; font-weight:bold">JOB ITEM NO.</th>
+                  <th colspan="2" style="border:1px solid black; width:40%; font-weight:bold">EQUIPMENT</th>
+                  <th rowspan="2" style="border:1px solid black; width:12%; font-weight:bold">MATERIAL</th>
+                  <th rowspan="2" style="border:1px solid black; width:10%; font-weight:bold">WEIGHT (Kg)</th>
+                  <th rowspan="2" style="border:1px solid black; width:8%; font-weight:bold">QTY</th>
+                </tr>
+                <tr style="background-color:#f2f2f2;">
+                  <th style="border:1px solid black; width:25%; font-weight:bold">NAME</th>
+                  <th style="border:1px solid black; width:15%; font-weight:bold">NUMBER</th>
+                </tr>
+              </thead>
+            
+              <tbody>
+                <t t-set="counter" t-value="0"/>
+                <t t-foreach="doc.item_purchased[:6]" t-as="line">
+                  <t t-set="counter" t-value="counter + 1"/>
+                  <tr style="height:20px;">
+                    <td style="border:1px solid black; text-align:center;"><t t-esc="counter"/></td>
+                    <td style="border:1px solid black; text-align:center;"><t t-esc="line.item_no"/></td>
+                    <td style="border:1px solid black; text-align:left; padding-left:2px;"><t t-esc="line.name"/></td>
+                    <td style="border:1px solid black; text-align:center;"><t t-esc="line.number"/></td>
+                    <td style="border:1px solid black; text-align:left; padding-left:2px;"><t t-esc="line.material"/></td>
+                    <td style="border:1px solid black; text-align:right; padding-right:2px;"><t t-esc="line.weight_ton"/></td>
+                    <td style="border:1px solid black; text-align:center;"><t t-esc="line.qty"/></td>
+                  </tr>
+                </t>
+              
+                <!-- Tambah baris kosong -->
+                <t t-foreach="range(5 - len(doc.item_purchased[:6]))" t-as="i">
+                  <tr style="height:20px;">
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                    <td style="border:1px solid black;"> </td>
+                  </tr>
+                </t>
+              </tbody>
+            
+              <!-- Row TOTAL -->
+              <tfoot>
+                <tr style="background-color:#f9f9f9; font-weight:bold;">
+                  <td colspan="5" style="border:1px solid black; text-align:center; padding-right:5px;">TOTAL</td>
+                  <td style="border:1px solid black; text-align:right; padding-right:5px;">
+                    <t t-esc="sum([line.weight_ton for line in doc.item_purchased])"/>
+                  </td>
+                  <td style="border:1px solid black; text-align:center;">
+                    <t t-esc="sum([line.qty for line in doc.item_purchased])"/>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>    
+
+            <!-- SCOPE OF WORK & SUPPLY --> 
+            <div style="font-weight: bold; font-size: 10px;">3. SCOPE OF WORK &amp; SUPPLY</div> 
+            <table style="width: 100%; border-collapse: collapse; border: 1px solid black; margin-bottom: 10px;"> 
+              <thead> 
+                <tr> 
+                  <th style="border: 1px solid black; width: 20%; font-weight: bold; padding-left: 5px;">DESCRIPTION</th> 
+                  <th style="border: 1px solid black; width: 60%; font-weight: bold; padding-left: 5px;">DETAIL SCOPE OF WORK AND SUPPLY</th> 
+                  <th style="border: 1px solid black; width: 20%; font-weight: bold; padding-left: 5px;">Remarks</th> 
+                </tr> 
+              </thead> 
+              <tbody> 
+                <t t-foreach="docs.scope_division_ids" t-as="scope"> 
+                  <tr> 
+                    <!-- Kolom DESCRIPTION dengan kotak --> 
+                    <td style="border: 1px solid black; padding: 4px;"> 
+                      <div> 
+                        <span t-if="scope.detail_scope and scope.remarks" style="display: inline-block; width: 12px; height: 12px; background-color: #003366; border: 1px solid black; margin-right: 5px; vertical-align: middle;"></span> 
+                        <span t-if="not (scope.detail_scope and scope.remarks)" style="display: inline-block; width: 12px; height: 12px; background-color: white; border: 1px solid black; margin-right: 5px; vertical-align: middle;"></span> 
+                        <span t-field="scope.remarks.name" style="vertical-align: middle;"/> 
+                      </div> 
+                    </td> 
+                    <!-- Kolom DETAIL --> 
+                    <td style="border: 1px solid black; padding-left: 5px;">
+                      <span t-field="scope.detail_scope"/>
+                    </td> 
+                    <!-- Kolom REMARKS --> 
+                    <td style="border: 1px solid black; padding-left: 5px;">
+                      <span t-field="scope.division"/>
+                    </td> 
+                  </tr> 
+                </t> 
+              </tbody> 
+            </table>
+
+            <!-- SPECIAL NOTE -->
+            <div style="font-weight:bold;">4. SPECIAL NOTE</div>
+            <div style="border:1px solid black; padding:5px; min-height:50px; margin-bottom:15px;">
+              <span t-field="doc.special_note"/>
+            </div>
+
+            <!-- ATTACHED DOCUMENTS -->
+            <div style="font-weight:bold;">5. ATTACHED DOCUMENTS</div>
+            <table style="width:100%; border-collapse:separate; border-spacing:0 4px; margin-bottom:10px;">
+              <tr>
+                <!-- Kolom kiri (5 item) -->
+                <td style="width:50%; vertical-align:top; padding-right:10px;">
+                  <div>
+                    <span t-if="doc.loiloa" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.loiloa" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">LOI/LOA</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.purchase_order" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.purchase_order" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Purchase Order</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.change_order" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.change_order" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Change Order</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.applicable_documents_list" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.applicable_documents_list" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Applicable Documents List</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.time_schedule" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.time_schedule" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Time Schedule</span>
+                  </div>
+                </td>
+              
+                <!-- Kolom kanan (4 item) -->
+                <td style="width:50%; vertical-align:top;">
+                  <div>
+                    <span t-if="doc.scope_of_work_supply" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.scope_of_work_supply" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Scope of Work &amp; Supply</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.ceb" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.ceb" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">CEB</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.clarification_record_of_contract" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.clarification_record_of_contract" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Clarification Record of Contract</span>
+                  </div>
+                  <div>
+                    <span t-if="doc.other_mom_list_of_equipment" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:#003366;margin-right:6px;vertical-align:middle;"></span>
+                    <span t-if="not doc.other_mom_list_of_equipment" style="display:inline-block;width:12px;height:12px;border:1px solid black;background-color:white;margin-right:6px;vertical-align:middle;"></span>
+                    <span style="vertical-align:middle;">Other (MOM, List of Equipment)</span>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- SIGNATURE -->
+            <div style="text-align:right;">
+              <p>Very truly yours,</p>
+              <t t-if="doc.tanda_tangan">
+                <img t-att-src="'data:image/png;base64,%s' % doc.tanda_tangan.decode('utf-8')" style="height:80px;width:80px;"/>
+              </t>
+              <p><strong><span t-field="doc.by"/></strong><br/><span t-field="doc.title"/></p>
+            </div>
+            <!-- FOOTER -->
+            <div style="font-size:8px">
+              Form No: 2110-FRM-03 QI Rev: 0 Effective Date: 05 Januari 2021
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </t>
+  </template>
+</odoo>

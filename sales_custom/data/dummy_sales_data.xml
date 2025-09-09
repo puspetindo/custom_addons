@@ -1,0 +1,16 @@
+<odoo>
+    <data noupdate="1">
+        <record id="dummy_sale_1" model="sale.order">
+            <field name="name">SO001</field>
+            <field name="partner_id" ref="base.res_partner_1"/>
+            <field name="amount_total" eval="1500.0"/>
+            <field name="state">sale</field>
+        </record>
+        <record id="dummy_sale_2" model="sale.order">
+            <field name="name">SO002</field>
+            <field name="partner_id" ref="base.res_partner_2"/>
+            <field name="amount_total" eval="2500.0"/>
+            <field name="state">sale</field>
+        </record>
+    </data>
+</odoo>

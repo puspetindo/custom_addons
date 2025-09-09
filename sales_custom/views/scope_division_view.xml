@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_scope_division_form" model="ir.ui.view">
+            <field name="name">scope.division.form</field>
+            <field name="model">sales_custom.scope_division</field>
+            <field name="arch" type="xml">
+                <form string="Scope of Work Detail">
+                    <group>
+                        <field name="remarks" string="Description" required="1" readonly="1"/>
+                        <field name="detail_scope" string="Detail Scope of Work and Supply" required="1"/>
+                        <field name="division" string="Remarks"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+    

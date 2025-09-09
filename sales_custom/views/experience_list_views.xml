@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Tree View -->
+        <record id="view_experience_list_tree" model="ir.ui.view">
+            <field name="name">experience.list.tree</field>
+            <field name="model">experience.list</field>
+            <field name="arch" type="xml">
+                <list string="Experience List" create="false" edit="false">
+                    <field name="no"/>
+                    <field name="job_no"/>
+                    <field name="equipment_package"/>
+                    <field name="client"/>
+                    <field name="material"/>
+                    <field name="qty"/>
+                    <field name="weight"/>
+                    <field name="value_idr"/>
+                    <field name="status_open"/>
+                    <field name="status_closed"/>
+                    <field name="bast_number"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_experience_list_search" model="ir.ui.view">
+            <field name="name">experience.list.search</field>
+            <field name="model">experience.list</field>
+            <field name="arch" type="xml">
+                <search string="Experience List">
+                    <field name="job_no" string="Job No"/>
+                    <field name="equipment_package"/>
+                    <field name="client"/>
+                    <field name="material"/>
+                    <filter name="group_by_client" string="Group by CLient" context="{'group_by': 'client'}"/>
+                    <filter name="group_by_material" string="Group by Material" context="{'group_by': 'material'}"/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_client" string="Client" context="{'group_by': 'client'}"/>
+                        <filter name="group_material" string="Material" context="{'group_by': 'material'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action Window -->
+        <record id="action_experience_list" model="ir.actions.act_window">
+            <field name="name">Experience List</field>
+            <field name="res_model">experience.list</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_experience_list_tree"/>
+            <field name="search_view_id" ref="view_experience_list_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Daftar semua Order Information yang telah dibuat.
+                </p>
+                <p>
+                    Anda dapat melihat dan mendownload data dalam format Excel.
+                </p>
+            </field>
+        </record>
+
+        <!-- Server Action (optional: tombol Download Excel di tree) -->
+        <record id="action_download_experience_excel" model="ir.actions.server">
+            <field name="name">Download Excel</field>
+            <field name="model_id" ref="model_experience_list"/>
+            <field name="binding_model_id" ref="model_experience_list"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_download_excel()</field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_order_kerja_document">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <!-- Header -->
+                        <div style="text-align:center;">
+                            <h2>ORDER KERJA</h2>
+                        </div>
+                        <table width="100%" style="font-size:12px;">
+                            <tr>
+                                <td>
+                                    <strong>No. OK:</strong>
+                                    <span t-field="doc.nomor_ok"/>
+                                </td>
+                                <td>
+                                    <strong>Tanggal:</strong>
+                                    <span t-field="doc.tanggal_ok"/>
+                                </td>
+                                <td>
+                                    <strong>Revisi:</strong>
+                                    <span t-field="doc.revisi"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Kepada -->
+                        <h4 style="margin-top:20px;">Kepada Yth:</h4>
+                        <table width="100%" style="font-size:12px;">
+                            <tr>
+                                <td>
+                                    <strong>Nama:</strong>
+                                    <span t-field="doc.kepada_nama.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Alamat:</strong>
+                                    <span t-esc="doc.kepada_alamat"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Telp:</strong>
+                                    <span t-esc="doc.kepada_kontak"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Email:</strong>
+                                    <span t-esc="doc.kepada_email"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Referensi dan Penawaran -->
+                        <h4 style="margin-top:20px;">Referensi</h4>
+                        <table width="100%" style="font-size:12px;" border="1" cellspacing="0" cellpadding="4">
+                            <tr>
+                                <td>
+                                    <strong>Referensi No.</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.referensi_nomor"/>
+                                </td>
+                                <td>
+                                    <strong>Tanggal</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.referensi_tanggal"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Penawaran No.</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.penawaran_nomor"/>
+                                </td>
+                                <td>
+                                    <strong>Tanggal</strong>
+                                </td>
+                                <td>
+                                    <span t-field="doc.penawaran_tanggal"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Ref. OK No.</strong>
+                                </td>
+                                <td colspan="3">
+                                    <span t-esc="doc.referensi_ok_no"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Syarat -->
+                        <h4 style="margin-top:20px;">Syarat-Syarat Utama</h4>
+                        <table width="100%" style="font-size:12px;" border="1" cellspacing="0" cellpadding="4">
+                            <tr>
+                                <td>
+                                    <strong>Syarat Pembayaran</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.syarat_pembayaran"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Lokasi Penyerahan</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.lokasi_penyerahan"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Syarat Penyerahan</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.syarat_penyerahan"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Tanggal Batas Penyerahan</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="doc.tanggal_batas_penyerahan"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Detail Pekerjaan -->
+                        <h4 style="margin-top:20px;">Detail Pekerjaan</h4>
+                        <table class="table table-sm" style="width:100%; font-size:11px;" border="1" cellspacing="0" cellpadding="4">
+                            <thead>
+                                <tr>
+                                    <th>Rev.</th>
+                                    <th>Jenis Pekerjaan</th>
+                                    <th>Uraian Pekerjaan</th>
+                                    <th>Kel. Biaya</th>
+                                    <th>Cost.C</th>
+                                    <th>No. POK</th>
+                                    <th>Qty</th>
+                                    <th>Satuan</th>
+                                    <th>Harga Satuan</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.detail_ids" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="line.revisi"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.jenis_pekerjaan"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.uraian_pekerjaan"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.kel_biaya"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.cost_c"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.no_internal_pok.name"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="line.qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line.satuan"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="line.harga_satuan"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="line.jumlah_total"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Sub Total -->
+                        <div style="text-align:right; font-size:12px; margin-top:10px;">
+                            <strong>Sub-Total:</strong>
+                            <span t-esc="doc.sub_total"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

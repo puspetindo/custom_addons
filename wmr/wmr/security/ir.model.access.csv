@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wmr_form,welding.material.requisition.form,model_wmr_wmr_form,,1,1,1,1
+access_wmr_list,welding.material.requisition.list,model_wmr_wmr_list,,1,1,1,1
+access_pok_form,pok.form,model_pok_form,,1,1,1,1
+access_list_pok,list.pok,model_list_pok,,1,1,1,1
+access_order_kerja_user,access_order_kerja_user,model_order_kerja,base.group_user,1,1,1,1
+access_order_kerja_detail_user,access_order_kerja_detail_user,model_order_kerja_detail,base.group_user,1,1,1,1
+access_wmr_revision_user,access_wmr_revision_user,model_wmr_wmr_revision,base.group_user,1,1,1,1

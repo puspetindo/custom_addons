@@ -1,0 +1,150 @@
+<odoo>
+    <record id="view_payment_detail_list" model="ir.ui.view">
+        <field name="name">payment.detail.list</field>
+        <field name="model">payment.detail</field>
+        <field name="arch" type="xml">
+            <list string="Perincian Pembayaran">
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="document_date" />
+                <field name="amount_total_net" sum="Total" />
+                <field name="verifier_user_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_payment_detail_form" model="ir.ui.view">
+        <field name="name">payment.detail.form</field>
+        <field name="model">payment.detail</field>
+        <field name="arch" type="xml">
+            <form string="Perincian Pembayaran">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="amount_paid" />
+                            <field name="use_template_lines" />
+                        </group>
+                        <group>
+                            <field name="source_document_ref" />
+                            <field name="journal_entry_ref" />
+                            <field name="recipient_bank_id" />
+                            <field name="today_date" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Rincian Biaya">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="wbs" />
+                                    <field name="rbs" />
+                                    <field name="tax_id" />
+                                    <field name="amount" />
+                                    <field name="currency_id" column_invisible="1" />
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_total_net" class="oe_subtotal_footer_separator" />
+                            </group>
+                        </page>
+                        <page string="Dokumen Pendukung">
+                            <group>
+                                <group>
+                                    <field name="is_memo_attached" />
+                                    <field name="memo_ref" invisible="not is_memo_attached" />
+                                    <field name="memo_file" widget="binary" filename="memo_filename"
+                                        invisible="not is_memo_attached" />
+                                    <field name="memo_filename" invisible="1" />
+
+                                    <field name="is_invoice_attached" />
+                                    <field name="invoice_ref" invisible="not is_invoice_attached" />
+                                    <field name="invoice_file" widget="binary"
+                                        filename="invoice_filename"
+                                        invisible="not is_invoice_attached" />
+                                    <field name="invoice_filename" invisible="1" />
+
+                                    <field name="is_tax_invoice_attached" />
+                                    <field name="tax_invoice_ref"
+                                        invisible="not is_tax_invoice_attached" />
+                                    <field name="tax_invoice_file" widget="binary"
+                                        filename="tax_invoice_filename"
+                                        invisible="not is_tax_invoice_attached" />
+                                    <field name="tax_invoice_filename" invisible="1" />
+
+                                    <field name="is_po_attached" />
+                                    <field name="po_ref" invisible="not is_po_attached" />
+                                    <field name="po_file" widget="binary" filename="po_filename"
+                                        invisible="not is_po_attached" />
+                                    <field name="po_filename" invisible="1" />
+                                </group>
+                                <group>
+                                    <field name="is_late_fee_doc_attached" />
+                                    <field name="late_fee_doc_file" widget="binary"
+                                        filename="late_fee_doc_filename"
+                                        invisible="not is_late_fee_doc_attached" />
+                                    <field name="late_fee_doc_filename" invisible="1" />
+
+                                    <field name="is_lpb_attached" />
+                                    <field name="lpb_ref" invisible="not is_lpb_attached" />
+                                    <field name="lpb_file" widget="binary" filename="lpb_filename"
+                                        invisible="not is_lpb_attached" />
+                                    <field name="lpb_filename" invisible="1" />
+
+                                    <field name="is_ba_attached" />
+                                    <field name="ba_file" widget="binary" filename="ba_filename"
+                                        invisible="not is_ba_attached" />
+                                    <field name="ba_filename" invisible="1" />
+
+                                    <field name="is_delivery_note_attached" />
+                                    <field name="delivery_note_file" widget="binary"
+                                        filename="delivery_note_filename"
+                                        invisible="not is_delivery_note_attached" />
+                                    <field name="delivery_note_filename" invisible="1" />
+
+                                    <field name="is_other_doc_attached" />
+                                    <field name="other_doc_file" widget="binary"
+                                        filename="other_doc_filename"
+                                        invisible="not is_other_doc_attached" />
+                                    <field name="other_doc_filename" invisible="1"></field>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Keterangan">
+                            <field name="notes" placeholder="Tambahkan catatan di sini..." />
+                        </page>
+                    </notebook>
+                    <group string="Persetujuan">
+                        <group>
+                            <field name="document_date" />
+                            <field name="verifier_user_id" />
+                            <field name="verifier_signature" widget="signature" />
+                        </group>
+                        <group>
+                            <field name="tax_checker_user_id" />
+                            <field name="tax_checker_signature" widget="signature" />
+                            <field name="accounting_approver_user_id" />
+                            <field name="accounting_approver_signature" widget="signature" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_payment_detail" model="ir.actions.act_window">
+        <field name="name">Perincian Pembayaran</field>
+        <field name="res_model">payment.detail</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Belum ada perincian pembayaran yang dibuat.
+            </p>
+        </field>
+    </record>
+</odoo>

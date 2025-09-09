@@ -1,0 +1,243 @@
+<odoo>
+    <data>
+        <template id="wmr_report_template">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page" style="font-size: 10pt; padding: 15mm;">
+                        <!-- Header with Logo and Title -->
+                        <table style="width:100%; border: 1px solid black; border-collapse: collapse; margin-bottom: 10px;">
+                            <tr>
+                                <td style="width: 20%; text-align: center; border-right: 1px solid black; vertical-align: middle;">
+                                    <img t-att-src="'/wmr/static/src/img/logo_puspetindo.png'" style="max-height: 60px; margin: 5px;" alt="Company Logo"/>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle; font-size: 16pt; font-weight: bolder; font-family: Arial, sans-serif;">WELDING MATERIAL REQUISITION - (WMR)</td>
+                                <td style="width: 25%; border-left: 1px solid black; vertical-align: middle; padding: 0;">
+                                    <table style="width: 100%; height: 95px; border: 1px solid black; border-collapse: collapse; font-size: 9pt; text-align: center;">
+                                        <tr style="height: 50%;">
+                                            <td style="text-align: center; vertical-align: middle; border: 1px solid black; padding: 2px; font-weight: bold; width: 50%;">Document No.</td>
+                                            <td style="text-align: center; vertical-align: middle; border: 1px solid black; padding: 2px; font-weight: bold; width: 50%;">Sheet No.</td>
+                                        </tr>
+                                        <tr style="height: 50%;">
+                                            <td style="text-align: center; vertical-align: middle; border: 1px solid black; padding: 2px; font-weight: normal">
+                                                <span t-field="doc.document_number"/>
+                                            </td>
+                                            <td style="text-align: center; vertical-align: middle; border: 1px solid black; padding: 2px; font-weight: normal">1 of 1</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Main Table -->
+                        <table style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-bottom: 5px; font-size: 8pt;">
+                            <thead>
+                                <tr>
+                                    <!--  Row 1 Headers  -->
+                                    <th rowspan="3" style="border: 1px solid black; width: 3%; vertical-align: middle; text-align: center;">No.</th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 15%; vertical-align: middle; text-align: center;">Description</th>
+                                    <th rowspan="1" style="border: 1px solid black; width: 12%; vertical-align: middle; text-align: center;">Dimension</th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 5%; vertical-align: middle; text-align: center;">Qty</th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 15%; vertical-align: middle; text-align: center;">Specification</th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 12%; vertical-align: middle; text-align: center;">
+Additional
+                                        <br/>
+Requirement
+                                    </th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 7%; vertical-align: middle; text-align: center;">
+Weight
+                                        <br/>
+(kg)
+                                    </th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 7%; vertical-align: middle; text-align: center;">
+Delivery at
+                                        <br/>
+PSP
+                                    </th>
+                                    <th colspan="2" style="border: 1px solid black; text-align: center;">
+Stock
+                                        <br/>
+Availability
+                                    </th>
+                                    <th rowspan="3" style="border: 1px solid black; width: 10%; vertical-align: middle; text-align: center;">Remarks</th>
+                                </tr>
+                                <tr>
+                                    <!--  Row 2 Headers  -->
+                                    <th style="border: 1px solid black;"/>
+                                    <th style="border: 1px solid black;"/>
+                                    <th style="border: 1px solid black;"/>
+                                </tr>
+                                <tr>
+                                    <!--  Row 3 Headers  -->
+                                    <th style="border: 1px solid black; text-align: center; font-size: 7pt;">
+Thk x Width x Length
+                                        <br/>
+ND x Sch/Thk x Length
+                                        <br/>
+ND x Sch x Rating
+                                    </th>
+                                    <th style="border: 1px solid black; width: 4%; text-align: center">Yes</th>
+                                    <th style="border: 1px solid black; width: 4%; text-align: center;">No</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="item_index" t-value="0"/>
+                                <t t-foreach="doc.item_purchased" t-as="item">
+                                    <tr>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <t t-esc="item_index + 1"/>
+                                            <t t-set="item_index" t-value="item_index + 1"/>
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <span t-field="item.nama_barang"/>
+                                        </td>
+                                        <!--  Single Dimension column  -->
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <span t-field="item.dimension_id"/>
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <span t-field="item.quantity"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 2px; vertical-align: middle;">
+                                            <span t-field="item.specification"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 2px; vertical-align: middle;">
+                                            <span t-field="item.additional_requirement"/>
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <span t-field="item.weight"/>
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <!--  Empty Delivery at PSP column - field belum ada  -->
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <!--  Empty Stock Availability Yes column - field belum ada  -->
+                                        </td>
+                                        <td style="border: 1px solid black; text-align: center; vertical-align: middle;">
+                                            <!--  Empty Stock Availability No column - field belum ada  -->
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 2px; vertical-align: middle;">
+                                            <span t-field="item.remarks"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <!--  Add empty rows to fill the table if needed  -->
+                                <t t-set="empty_rows" t-value="15 - len(doc.item_purchased) if len(doc.item_purchased) &lt; 15 else 0"/>
+                                <t t-foreach="range(empty_rows)" t-as="empty_row">
+                                    <tr>
+                                        <td style="border: 1px solid black; height: 20px;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Bottom Section -->
+                        <table style="width: 100%; border: 1px solid black; border-collapse: collapse; margin-bottom: 5px;">
+                            <tr>
+                                <!-- Note Section -->
+                                <td style="border-right: 1px solid black; width: 60%; padding: 8px; vertical-align: top;">
+                                    <div style="font-weight: bold; margin-bottom: 8px; font-size: 10pt;">Note :</div>
+                                    <div style="height: 100px; margin-bottom: 10px;">
+                                        <span t-field="doc.note"/>
+                                    </div>
+                                    <!-- Customer Info Section -->
+                                    <div style="margin-top: 10px; border-top: 1px solid black;">
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <tr>
+                                                <td style="padding: 4px; width: 30%; border-right: 1px solid black;">
+                                                    <div style="font-weight: bold; font-size: 10pt;">CUSTOMER</div>
+                                                    <div style="font-size: 9pt;"><span t-field="doc.customer"/></div>
+                                                </td>
+                                                <td style="padding: 4px; width: 30%; border-right: 1px solid black;">
+                                                    <div style="font-weight: bold; font-size: 10pt;">PROJECT</div>
+                                                    <div style="font-size: 9pt;"><span t-field="doc.project"/></div>
+                                                </td>
+                                                <td style="padding: 4px; width: 20%; border-right: 1px solid black;">
+                                                    <div style="font-weight: bold; font-size: 10pt;">ITEM NAME</div>
+                                                    <div style="font-size: 9pt;"><span t-field="doc.job_item_name"/></div>
+                                                </td>
+                                            <td style="padding: 4px; width: 20%;">
+                                                <div style="font-weight: bold; font-size: 10pt;">JOB NO.</div>
+                                                <div style="font-size: 9pt;"><span t-field="doc.job_order_no"/></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+
+                                <!-- Revision History Section -->
+                                <td style="width: 40%; vertical-align: top;">
+                                    <table style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                                        <!-- Revision table header -->
+                                        <tr>
+                                            <td style="border: 1px solid black; text-align: center; font-weight: bold; font-size: 9pt; padding: 4px;">Rev.<br/>No.</td>
+                                            <td style="border: 1px solid black; text-align: center; font-weight: bold; font-size: 9pt; padding: 4px;">Date</td>
+                                            <td style="border: 1px solid black; text-align: center; font-weight: bold; font-size: 9pt; padding: 4px;">Prepared by</td>
+                                            <td style="border: 1px solid black; text-align: center; font-weight: bold; font-size: 9pt; padding: 4px;">Checked by</td>
+                                            <td style="border: 1px solid black; text-align: center; font-weight: bold; font-size: 9pt; padding: 4px;">Approved by</td>
+                                        </tr>
+                                        <!-- Revision rows -->
+                                        <t t-set="max_revs" t-value="7"/>
+                                        <t t-set="rev_index" t-value="0"/>
+                                        <t t-foreach="doc.revision_ids" t-as="rev">
+                                            <tr>
+                                                <td style="border: 1px solid black; text-align: center; height: 20px; font-size: 9pt;">
+                                                    <t t-esc="rev_index"/>
+                                                </td>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;">
+                                                    <span t-field="rev.date"/>
+                                                </td>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;">
+                                                    <span t-field="rev.inisial_dibuat"/>
+                                                    <t t-if="rev.ttd_dibuat">
+                                                        <img t-att-src="image_data_uri(rev.ttd_dibuat)" style="max-height:18px; max-width:60px; margin-left:4px; vertical-align:middle;" alt="Signature"/>
+                                                    </t>
+                                                </td>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;">
+                                                    <span t-field="rev.inisial_diperiksa"/>
+                                                    <t t-if="rev.ttd_diperiksa">
+                                                        <img t-att-src="image_data_uri(rev.ttd_diperiksa)" style="max-height:18px; max-width:60px; margin-left:4px; vertical-align:middle;" alt="Signature"/>
+                                                    </t>
+                                                </td>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;">
+                                                    <span t-field="rev.inisial_disetujui"/>
+                                                    <t t-if="rev.ttd_disetujui">
+                                                        <img t-att-src="image_data_uri(rev.ttd_disetujui)" style="max-height:18px; max-width:60px; margin-left:4px; vertical-align:middle;" alt="Signature"/>
+                                                    </t>
+                                                </td>
+                                            </tr>
+                                            <t t-set="rev_index" t-value="rev_index + 1"/>
+                                        </t>
+                                        <t t-foreach="range(max_revs - rev_index)" t-as="i">
+                                            <tr style="height: 20px;">
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;"><t t-esc="rev_index + i"/></td>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;"/>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;"/>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;"/>
+                                                <td style="border: 1px solid black; text-align: center; font-size: 9pt;"/>
+                                            </tr>
+                                        </t>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Footer with Form Number -->
+                        <div style="text-align: right; margin-top: 5px; font-size: 8pt;">
+                            Form No. : 3120-FRM-01-01 Rev. : 00 Eff. Date : 05 Januari 2021
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

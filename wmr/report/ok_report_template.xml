@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_order_kerja_document">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <table width="100%" style="font-size:12px;">
+                            <thead>
+                                <tr style= "width : 100%">
+                                    <th colspan="8" >ORDER KERJA</th>
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <th colspan="2" rowspan="7" >PT. PUSPETINDO <br/>
+                                        <img style="height: 70%" t-att-src="'/wmr/static/src/img/logo2.png'" class="company-logo" alt="Puspetindo Logo"/>
+                                        alamat disini silahkan ditulis
+                                    </th>
+                                    <th style="width: 20%" >Refrensi Kami</th>
+                                    <th colspan="2" style="width: 20%" >Syarat-Syarat Utama</th>
+                                    <th colspan="2" style="width: 20%" >Kepada</th>
+                                    <th style="width: 20%" rowspan="2">No. OK :</th>,j
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <td style="width: 20%">Nomor : <span>2281618</span></td>
+                                    <td style="width: 20%" colspan="2" rowspan="3">Syarat Pembayaran : <span>Lihat Keterangan</span></td>
+                                    <td  colspan="2" style="width: 20%" rowspan="4">PT. ERA SOLUSI INDONESIA</td>
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <td style="width: 20%" >Tanggal  : <span> - </span></td>
+                                    <td rowspan="2">Tanggal : 10 April 2025</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center;">Penawaran Saudara</td>
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <td>Nomor : <span>301/TRN-ESAS-SFT/IV/2022</span></td>
+                                    <td colspan="2">Lokasi Penyerahan : PT. PUSPETINDO</td>
+                                    <td >Halaman : 1</td>
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <td> Tanggal : <span>6 April 2024</span></td>
+                                    <td colspan="2"> Syarat Penyerahan : <span>- </span></td>
+                                    <td colspan="2"> Telp : <span>08265518 </span></td>
+                                    <td rowspan="2">Revisi : 0</td>
+                                </tr>
+                                <tr style= "width : 100%">
+                                    <td> Ref. OK No : <span> - </span></td>
+                                    <td colspan="2">Tanggal Batas Penyerahan : <span> Setelah Pelatihan</span></td>
+                                    <td colspan="2">Email : <span>test@gmail.com</span></td>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!-- <t t-set="item_index" t-value="0"/>
+                                <t t-foreach="doc.item_purchased" t-as="item"> -->
+                                    <tr style="width : 100%">
+                                        <td style="width : 7,5%">No.</td>
+                                        <td style="width : 7,5%">Rev.</td>
+                                        <td style="width : 15%">Jenis Pekerjaan</td>
+                                        <td style="width : 20%">Uraian Pekerjaan</td>
+                                        <td style="width : 10%">Kel. Biaya</td>
+                                        <td style="width : 10%">No. Internal</td>
+                                        <td style="width : 10%">Jumlah</td>
+                                        <td style="width : 20%">Harga</td>
+                                    </tr>
+
+                                <t t-set="empty_rows" t-value="15 - len(doc.detail_ids) if len(doc.detail_ids) &lt; 15 else 0"/>
+                                <t t-foreach="range(empty_rows)" t-as="empty_row">
+                                    <tr>
+                                        <!-- <td style="border: 1px solid black; height: 20px;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/>
+                                        <td style="border: 1px solid black;"/> -->
+                                        <td style="width : 7,5%"></td>
+                                        <td style="width : 7,5%"></td>
+                                        <td style="width : 15%"></td>
+                                        <td style="width : 20%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 20%"></td>
+                                    </tr>
+                                </t>
+
+                                    <!-- <tr style="width : 100%">
+                                        <td style="width : 7,5%"></td>
+                                        <td style="width : 7,5%"></td>
+                                        <td style="width : 15%"></td>
+                                        <td style="width : 20%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 10%"></td>
+                                        <td style="width : 20%"></td>
+                                    </tr> -->
+                                <!-- </t> -->
+                            </tbody>
+                        </table>
+
+                        
+                        <!-- Sub Total -->
+                        <div style="text-align:right; font-size:12px; margin-top:10px;">
+                            <strong>Sub-Total:</strong>
+                            <span t-esc="doc.sub_total"/>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

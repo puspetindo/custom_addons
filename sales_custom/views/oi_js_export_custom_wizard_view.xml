@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_oi_js_export_wizard_form" model="ir.ui.view">
+    <field name="name">sales_custom.oi_js.export.wizard.form</field>
+    <field name="model">sales_custom.oi_js.export.wizard</field>
+    <field name="arch" type="xml">
+      <form string="Export Daftar Project JS">
+        <group>
+          <div class="o_form_label">
+            Klik tombol <b>Export</b> untuk mengunduh file Excel.
+          </div>
+        </group>
+        <footer>
+          <button string="Export" type="object" name="action_export_excel_js" class="btn-primary"/>
+          <button string="Close" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+</odoo>

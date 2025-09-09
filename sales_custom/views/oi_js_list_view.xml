@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Action untuk buka export wizard -->
+    <record id="action_oi_js_export_wizard" model="ir.actions.act_window">
+        <field name="name">Export Project JS</field>
+        <field name="res_model">sales_custom.oi_js.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Tree View untuk Order Information JS -->
+    <record id="view_oi_js_list_tree" model="ir.ui.view">
+        <field name="name">sales_custom.oi_js.list.tree</field>
+        <field name="model">sales_custom.oi_js</field>
+        <field name="arch" type="xml">
+            <list string="Daftar Project JS" create="false" edit="false" delete="false">
+                <header>
+                    <button name="%(action_oi_js_export_wizard)d"
+                            string="Export to Excel"
+                            type="action"
+                            class="btn-primary"/>
+                </header>
+
+                <!-- Kolom utama sesuai Excel -->
+                <field name="date_1" string="Starting"/>
+                <field name="delivery_input" string="Delivery"/>
+                <field name="job_order_no" string="Project No."/>
+                <field name="project" string="Project Name"/>
+                <field name="pospk_no" string="Contract No"/>
+                <field name="customer_id" string="Customer Name"/>
+                <field name="quotation_no" string="Quotation No."/>
+                <field name="value_usd" string="USD"/>
+                <field name="value_idr" string="IDR"/>
+                <field name="status" string="Status"/>
+                <field name="stamp" string="Stamp"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Action untuk buka list view -->
+    <record id="action_oi_js_list" model="ir.actions.act_window">
+        <field name="name">Daftar Project JS</field>
+        <field name="res_model">sales_custom.oi_js</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_oi_js_list_tree"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tidak ada data Project JS yang ditemukan.
+            </p>
+            <p>
+                Klik tombol <b>Export to Excel</b> untuk mengekspor daftar Project JS ke Excel.
+            </p>
+        </field>
+    </record>
+</odoo>

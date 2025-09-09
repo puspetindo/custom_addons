@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_order_information_close_form" model="ir.ui.view">
+        <field name="name">sales_custom.order_information.close.form</field>
+        <field name="model">sales_custom.order_information.close</field>
+        <field name="arch" type="xml">
+            <form string="Close Project">
+                <sheet>
+                    <group>
+                        <field name="order_id" invisible="True"/>
+                        <div class="o_form_label">Silakan isi nomor BAST dan tanggal close untuk proyek ini:</div>
+                        <field name="bast_number" string="Nomor BAST" required="1"/>
+                        <field name="close_date" string="Tanggal Close" required="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_confirm_close" string="OK" type="object" class="btn-primary"/>
+                    <button name="action_cancel_close" string="Cancel" type="object" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,8 @@
+<odoo>
+    <menuitem
+        id="menu_payment_detail_root"
+        name="Perincian Pembayaran"
+        action="action_payment_detail"
+        parent="account.menu_finance_payables"
+        sequence="20"/>
+</odoo>

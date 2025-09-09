@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_laporan_penerimaan_barang_list" model="ir.ui.view">
+        <field name="name">laporan.penerimaan.barang.list</field>
+        <field name="model">laporan.penerimaan.barang</field>
+        <field name="arch" type="xml">
+            <list string="Laporan Penerimaan Barang">
+                <field name="no_lpb" />
+                <field name="tanggal_lpb" />
+                <field name="tanggal_kedatangan" />
+                <field name="no_po" />
+                <field name="no_sj" />
+                <field name="dibeli_dari" />
+                <field name="status_pengiriman" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_laporan_penerimaan_barang_form" model="ir.ui.view">
+        <field name="name">laporan.penerimaan.barang.form</field>
+        <field name="model">laporan.penerimaan.barang</field>
+        <field name="arch" type="xml">
+            <form string="Laporan Penerimaan Barang">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="dibeli_dari" />
+                            <field name="alamat_pengirim" />
+                            <field name="no_sj" />
+                            <field name="tanggal_kedatangan" />
+                        </group>
+                        <group>
+                            <field name="no_lpb" />
+                            <field name="tanggal_lpb" />
+                            <!-- <field name="rev_lpb"/> -->
+                            <field name="no_po" />
+                            <field name="status_pengiriman" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail Barang">
+                            <field name="line_ids" context="{'form_view_ref': 'inventory_extension.laporan_penerimaan_barang_line_form'}">
+                                <list>
+                                    <!-- <field name="rev_line"/> -->
+                                    <field name="product_id" string="Nama Barang"/>
+                                    <field name="spesification_id" string="Spesifikasi"/>
+                                    <field name="dimension_id" string="Dimensi"/>
+                                    <field name="kode_barang"/>
+                                    <field name="job_dept"/>
+                                    <field name="jumlah"/>
+                                    <field name="satuan"/>
+                                    <field name="keterangan"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group string="Tanda Tangan" col="2">
+                        <group>
+                            <field name="ttd_wh" widget="signature"></field>
+                        </group>
+                        <group>
+                            <field name="ttd_prc" widget="signature"></field>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_laporan_penerimaan_barang" model="ir.actions.act_window">
+        <field name="name">Laporan Penerimaan Barang</field>
+        <field name="res_model">laporan.penerimaan.barang</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Belum ada laporan penerimaan barang
+            </p>
+        </field>
+    </record>
+
+    <record id="laporan_penerimaan_barang_line_form" model="ir.ui.view">
+        <field name="name">laporan.penerimaan.barang.line.form</field>
+        <field name="model">laporan.penerimaan.barang.line</field>
+        <field name="arch" type="xml">
+            <form string="Detail Barang">
+                <group>
+                    <field name="product_id" string="Nama Barang"/>
+                    <field name="dimension_id" string="Dimensi"/>
+                    <field name="spesification_id" string="Spesifikasi"/>
+                </group>
+                <group string="Kode">
+                    <field name="kode_barang"/>
+                    <field name="job_dept"/>
+                </group>
+                <group string="Jumlah">
+                    <field name="jumlah"/>
+                    <field name="satuan"/>
+                </group>
+                <group>
+                    <field name="keterangan" string="Keterangan"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+</odoo>

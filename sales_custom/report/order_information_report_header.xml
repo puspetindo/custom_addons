@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="order_information_report_header">
+        <t t-set="doc" t-value="doc"/>
+        <!-- HEADER -->
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">      
+            <img t-att-src="'/sales_custom/static/src/img/logo.png'" alt="Logo" style="height: 50px; width: 50px; margin-right: 10px;"/>
+            <div style="font-weight: bold; font-size: 20px; text-align: center; flex-grow: 1;">
+                ORDER INFORMATION
+            </div>
+        </div>
+
+        <!-- Top Information Block as a Table -->
+        <table style="width: 100%; margin-bottom: 10px;">
+            <tr>
+                <td style="width: 25%;"><strong>Job Order No.</strong> :</td>
+                <td style="width: 35%;"><span t-field="doc.job_order_no"/></td>
+                <td style="width: 15%;"><strong>Revision</strong> :</td>
+                <td style="width: 25%;"><span t-field="doc.revision"/></td>
+            </tr>
+            <tr>
+                <td><strong>Distribution To</strong> :</td>
+                <td><span t-field="doc.distribution_to"/></td>
+                <td><strong>Date</strong> :</td>
+                <td><span t-field="doc.date"/></td>
+            </tr>
+        </table>
+
+        <!-- JOB REFERENCE -->
+        <table style="width: 100%; border: 1px solid black; border-collapse: separate; border-spacing: 0px; margin-bottom: 10px;">
+            <tr style="background-color: #d3d3d3;">
+                <td colspan="4" style="text-align: center; font-weight: bold; padding: 5px; font-size: 14px;">
+                    JOB REFERENCE
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 25%; padding: 4px;"><strong>Inquiry No.</strong> :</td>
+                <td style="width: 35%; padding: 4px;"><span t-field="doc.inquiry_no"/></td>
+                <td style="width: 15%; padding: 4px;"><strong>Date</strong> :</td>
+                <td style="width: 25%; padding: 4px;"><span t-field="doc.date_1" t-options='{"widget": "date"}'/></td>
+            </tr>
+            <tr>
+                <td style="width: 25%; padding: 4px;"><strong>Quotation No.</strong> :</td>
+                <td style="width: 35%; padding: 4px;"><span t-field="doc.quotation_no"/></td>
+                <td style="width: 15%; padding: 4px;"><strong>Date</strong> :</td>
+                <td style="width: 25%; padding: 4px;"><span t-field="doc.date_2" t-options='{"widget": "date"}'/></td>
+            </tr>
+            <tr>
+                <td style="width: 25%; padding: 4px;"><strong>LOI/LOA No.</strong> :</td>
+                <td style="width: 35%; padding: 4px;"><span t-field="doc.loiloa_no"/></td>
+                <td style="width: 15%; padding: 4px;"><strong>Date</strong> :</td>
+                <td style="width: 25%; padding: 4px;"><span t-field="doc.date_3" t-options='{"widget": "date"}'/></td>
+            </tr>
+            <tr>
+                <td style="width: 25%; padding: 4px;"><strong>PO/SPK No.</strong> :</td>
+                <td style="width: 35%; padding: 4px;"><span t-field="doc.pospk_no"/></td>
+                <td style="width: 15%; padding: 4px;"><strong>Date</strong> :</td>
+                <td style="width: 25%; padding: 4px;"><span t-field="doc.date_4" t-options='{"widget": "date"}'/></td>
+            </tr>
+        </table>
+
+        <!-- PROJECT TITLE -->
+        <div style="font-weight: bold; font-size: 14px; text-transform: uppercase; margin-bottom: 5px;">1. PROJECT TITLE</div>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 1px solid black;">
+            <tr>
+                <td style="padding: 5px; font-weight: bold; width: 20%; border-bottom: 1px solid black;">Customer</td>
+                <td style="padding: 5px; border-bottom: 1px solid black;">: <span t-field="doc.customer_id"/></td>
+            </tr>
+            <tr>
+                <td style="padding: 5px; font-weight: bold; width: 20%;">Project</td>
+                <td style="padding: 5px;">: <span t-field="doc.project"/></td>
+            </tr>
+        </table>
+    </template>
+</odoo>

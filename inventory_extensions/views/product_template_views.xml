@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menambahkan field specification dan dimension_id pada form produk -->
+    <record id="product_template_form_view_inherit_specs" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.specs</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <!-- Menambahkan field langsung ke group utama di General Information -->
+            <xpath expr="//page[@name='general_information']//group[@name='group_general']"
+                position="inside">
+                <field name="kode_barang" string="Kode Barang" />
+                <field name="kode_kategori" string="Kode Kategori" />
+                <field name="jenis_barang" widget="radio" options="{'horizontal': true}" />
+                <field name="spesifikasi_domain" invisible="1" />
+                <field name="dimensi_domain" invisible="1" />
+                <field name="specification_id" />
+                <field name="dimension_id" />
+                <field name="nama_satuan" string="Satuan" />
+                <field name="kode_biaya" string="Kode Biaya" />
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='general_information']" position="after">
+                <page name="stock_info" string="Informasi Stock">
+                    <group>
+                        <field name="stock_awal" />
+                        <field name="stock_akhir" readonly="1" />
+                        <field name="stock_bebas" readonly="1" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="product_template_tree_view_inherit_specs" model="ir.ui.view">
+        <field name="name">product.template.tree.inherit.specs</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='name']" position="before">
+                <field name="kode_barang" />
+                <field name="kode_kategori" />
+            </xpath>
+            <xpath expr="//list/field[@name='name']" position="after">
+                <field name="specification_id" />
+                <field name="dimension_id" />
+                <field name="nama_satuan" string="Satuan" />
+                <field name="kode_biaya" string="Kode Biaya" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo> 

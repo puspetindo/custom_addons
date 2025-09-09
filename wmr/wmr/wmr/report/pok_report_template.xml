@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+            1) CSS Styling untuk Laporan POK yang disesuaikan
+        -->
+        <template id="wmr.report_pok_form_style">
+            <style>
+                .page {
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 12px;
+                    margin: 0;
+                    padding: 15px;
+                    page-break-after: always;
+                }
+                .table-bordered th,
+                .table-bordered td {
+                    border: 1.5px solid #ffffff;
+                    padding: 6px !important;
+                    vertical-align: middle;
+                    font-size: 10pt;
+                }
+                .table thead th {
+                    background-color: #f8f9fa !important;
+                    font-weight: bold;
+                    text-align: center;
+                }
+
+                .header-title {
+                    text-align: center;
+                    margin: 0;
+                    padding: 0;
+                }
+                .header-title h2 {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 14pt;
+                    font-weight: bold;
+                    line-height: 1.2;
+                }
+                .header-title h3 {
+                    margin: 2px 0 0 0;
+                    padding: 0;
+                    font-size: 12pt;
+                    font-weight: bold;
+                    line-height: 1.2;
+                }
+                .info-row {
+                    margin-bottom: 8px;
+                    white-space: nowrap;
+                }
+                .info-label {
+                    display: inline-block;
+                    width: 140px;
+                    font-weight: bold;
+                }
+                .main-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 15px;
+                }
+
+                .main-table th, .main-table td {
+                    border: 1.5px solid #000000;
+                    padding: 8px;
+                    vertical-align: middle;
+                    font-size: 10pt;
+                }
+                .main-table thead th {
+                    background-color: #ffffff;
+                    font-weight: bold;
+                    text-align: center;
+                }
+
+                /* Tanda Tangan - LAYOUT BARU */
+                .signature-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15px;
+                    table-layout: fixed;
+                }
+                .signature-table td.signature-cell {
+                    width: 14.28%;
+                    overflow: hidden;
+                }
+                .signature-table th, 
+                .signature-table td {
+                    border: 1.5px solid #000;
+                    padding: 8px;
+                    vertical-align: top;
+                    font-size: 9pt;
+                }
+                .signature-header {
+                    font-weight: bold;
+                    text-align: center;
+                    background-color: #f8f9fa;
+                }
+                .signature-subheader {
+                    font-weight: bold;
+                    text-align: center;
+                    vertical-align: middle;
+                    font-size: 8pt;
+                    background-color: #f0f0f0;
+                }
+                /* Container untuk setiap cell tanda tangan */
+                .signature-cell {
+                    height: 150px;
+                    position: relative;
+                    padding: 8px;
+                }
+                /* Tanda tangan di bagian tengah */
+                .signature-center {
+                    text-align: center;
+                    margin: 0 0 30px 0;
+                    min-height: 80px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    overflow: hidden;
+                }
+                .signature-img {
+                    max-height: 250px;
+                    max-width: 250px;
+                    object-fit: contain;
+                }
+                /* Layout bawah: nama kiri, tanggal kanan */
+                .signature-bottom {
+                    position: absolute;
+                    bottom: 8px;
+                    left: 8px;
+                    right: 8px;
+                    display: table;
+                    width: 100%;
+                }
+                .signature-name {
+                    font-weight: bold;
+                    font-size: 7.5pt;
+                    line-height: 1.2;
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: left;
+                    margin: 0;
+                    padding: 0;
+                }
+                .signature-date {
+                    font-size: 7.5pt;
+                    text-align: right;
+                    line-height: 1.2;
+                    display: table-cell;
+                    vertical-align: middle;
+                    margin: 0;
+                    padding: 0;
+                }
+                .disposisi-section {
+                    margin: 15px 0;
+                }
+                .disposisi-box {
+                    border: 1.5px solid #000;
+                    min-height: 60px;
+                    padding: 10px;
+                    margin-top: 5px;
+                }
+                .footer-info {
+                    text-align: left;
+                    font-size: 10pt;
+                    margin-top: 12px;
+                    border-top: 1px solid #000;
+                    padding-top: 5px;   
+                }
+                .text-center {
+                    text-align: center;
+                }
+                .text-bold {
+                    font-weight: bold;
+                }
+                .company-logo {
+                    max-height: 60px;
+                    margin: 5px;
+                }
+                .tabel-second{
+                    border: 1.5px solid #ffffff;
+                    border-collapse: collapse;
+                }
+                .tabel-second td, .tabel-second th, .tabel-second tr  {
+                    border: none !important;
+                }
+            </style>
+        </template>
+
+        <!--
+            2) CSS untuk Media Cetak
+        -->
+        <template id="wmr.report_pok_form_print_style">
+            <style media="print">
+                @page {
+                    size: A4;
+                    margin: 0mm;
+                }
+                .page {
+                    page-break-after: always;
+                }
+                .page:last-child {
+                    page-break-after: avoid;
+                }
+                .no-print {
+                    display: none !important;
+                }
+            </style>
+        </template>
+
+        <!--
+            3) Template Utama POK Form
+        -->
+        <template id="report_pok_form_document">
+            <t t-call="web.basic_layout">
+                <t t-call="wmr.report_pok_form_style"/>
+                <t t-call="wmr.report_pok_form_print_style"/>
+
+
+                <t t-foreach="docs" t-as="doc">
+                    <div class="page">
+                        <!-- Header Section -->
+                        <div class="header-section">
+                            <!-- Header dengan Logo dan Judul -->
+                            <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse; border: 1.5px solid #ffffff;">
+                                <tr>
+                                    <!-- Logo Puspetindo -->
+                                    <td >
+                                        <img t-att-src="'/wmr/static/src/img/logo_puspetindo.png'" class="company-logo" alt="Puspetindo Logo"/>
+                                    </td>
+
+                                    <!-- Judul Utama -->
+                                    <td style="width: 85%; vertical-align: middle;">
+                                        <div class="header-title">
+                                            <h2><b>PERMINTAAN ORDER KERJA (POK)</b></h2>
+                                            <h2><b>EKSTERNAL</b></h2>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Content Section -->
+
+                        <!-- Info Departemen dan Info Dokumen dalam satu baris -->
+                        <table class="tabel-second" style="width: 100%; margin-bottom: 12px; border-collapse: collapse;">
+                            <tr style="border: none !important;">
+                                <!-- Info Departemen (Kiri) -->
+                                <td style="width: 60%; vertical-align: top; border: none !important;">
+                                    <div class="info-row">
+                                        <span class="info-label">No.</span>
+                                        <span>:                                            <span t-field="doc.number_form"/>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">Tanggal</span>
+                                        <span>:                                            <span t-field="doc.tanggal_input" t-options="{'widget': 'date'}"/>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">Ref POK / OK No.</span>
+                                        <span>:                                            <span t-field="doc.ref_pok"/>
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <!-- Info Dokumen (Kanan) -->
+                                <td style="width: 40%; vertical-align: top; padding-left: 12px; border: none !important;">
+                                    <div class="info-row">
+                                        <span class="info-label">Dari Dept.</span>
+                                        <span>:                                            <span t-field="doc.from_dept.name"/>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">Kepada Dept.</span>
+                                        <span>:                                            <span t-field="doc.to_dept.name"/>
+                                        </span>
+                                    </div>
+                                    <div class="info-row">
+                                        <span class="info-label">Pusat Biaya</span>
+                                        <span>:
+                                            <t t-if="doc.tipe_pusat_biaya == 'je'">
+                                                <span t-field="doc.pusat_biaya_je.job_order_no"/>
+                                            </t>
+                                            <t t-if="doc.tipe_pusat_biaya == 'dept'">
+                                                <span t-field="doc.kode_dept"/> - <span t-field="doc.pusat_biaya_dept.name"/>
+                                            </t>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Tabel Utama -->
+                        <table class="main-table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="width: 3%;">No.</th>
+                                    <th style="width: 30%;">Deskripsi Pekerjaan</th>
+                                    <th style="width: 7%;">Tipe</th>
+                                    <th style="width: 7%;">Kode Mesin / Aset</th>
+                                    <th style="width: 8%;">Target Selesai</th>
+                                    <th style="width: 8%;">Tanggal Rencana</th>
+                                    <th style="width: 8%;">Tanggal Selesai</th>
+                                    <th style="width: 28%;">Penjelasan Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Inisialisasi counter -->
+                                <t t-set="line_num" t-value="1"/>
+
+                                <!-- Loop untuk setiap item POK -->
+                                <t t-foreach="doc.list_pok" t-as="line">
+                                    <tr style="height: 40px;">
+                                        <td class="text-center">
+                                            <span t-esc="line_num"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.deskripsi"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.tipe"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.kode"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.target_selesai" t-options="{'widget':'date'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.tanggal_rencana" t-options="{'widget':'date'}"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.tanggal_selesai" t-options="{'widget':'date'}"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.penjelasan"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="line_num" t-value="line_num + 1"/>
+                                </t>
+
+                                <!-- Tambahkan baris kosong jika diperlukan -->
+                                <t t-set="empty_rows" t-value="max(0, 8 - len(doc.list_pok))"/>
+                                <t t-foreach="range(empty_rows)" t-as="i">
+                                    <tr style="height: 40px;">
+                                        <td class="text-center"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <!-- Bagian Disposisi -->
+                        <div class="disposisi-section">
+                            <div style="font-weight: bold; margin-bottom: 5px;">
+                                Disposisi kepada (diisi oleh Procurement) :
+                            </div>
+                            <div class="disposisi-box">
+                                <span t-field="doc.disposisi"/>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Tanda Tangan -->
+                        <table class="signature-table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" class="signature-header">PEMINTA ORDER</th>
+                                    <th colspan="3" class="signature-header">PROCUREMENT</th>
+                                    <th colspan="1" class="signature-header">PEMINTA ORDER</th>
+                                </tr>
+                                <tr>
+                                    <th class="signature-subheader">Dibuat oleh</th>
+                                    <th class="signature-subheader">Diperiksa oleh</th>
+                                    <th class="signature-subheader">Disetujui oleh</th>
+                                    <th class="signature-subheader">Diterima oleh</th>
+                                    <th class="signature-subheader">Disetujui oleh</th>
+                                    <th class="signature-subheader">Diselesaikan oleh</th>
+                                    <th class="signature-subheader">Diterima oleh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <!-- Dibuat oleh -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_dibuat">
+                                                <img t-att-src="image_data_uri(doc.ttd_dibuat)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_dibuat"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_dibuat" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Diperiksa oleh -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_diperiksa">
+                                                <img t-att-src="image_data_uri(doc.ttd_diperiksa)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_diperiksa"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_diperiksa" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Disetujui oleh -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_disetujui">
+                                                <img t-att-src="image_data_uri(doc.ttd_disetujui)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_disetujui"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_disetujui" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Diterima oleh (Procurement) -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_diterima">
+                                                <img t-att-src="image_data_uri(doc.ttd_diterima)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_penerima"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_diterima" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Disetujui oleh (Procurement) -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_disetujui_2">
+                                                <img t-att-src="image_data_uri(doc.ttd_disetujui_2)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_disetujui_2"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_disetujui_2" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Diselesaikan oleh -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_diselesaikan">
+                                                <img t-att-src="image_data_uri(doc.ttd_diselesaikan)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_diselesaikan"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_diselesaikan" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- Diterima oleh (Final) -->
+                                    <td class="signature-cell">
+                                        <div class="signature-center">
+                                            <t t-if="doc.ttd_diterima_1">
+                                                <img t-att-src="image_data_uri(doc.ttd_diterima_1)" class="signature-img" alt="Signature"/>
+                                            </t>
+                                        </div>
+                                        <div class="signature-bottom">
+                                            <div class="signature-name">
+                                                <span t-field="doc.nama_penerima_1"/>
+                                            </div>
+                                            <div class="signature-date">
+                                                Tgl. <span t-field="doc.tanggal_diterima_1" t-options="{'widget':'date'}"/>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Footer -->
+                        <div class="footer-info">
+                            <strong>No. Form : 1220-FRM-01-02   Ed / Rev : 01 / 00   Tgl. Efektif : 15 Desember 2022</strong>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

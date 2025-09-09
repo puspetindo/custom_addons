@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the account move form view to add custom fields -->
+        <record id="view_account_move_form_inherit_invoice_extensions" model="ir.ui.view">
+            <field name="name">account.move.form.inherit.invoice.extensions</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            
+            <field name="arch" type="xml">
+                <!-- Add custom report button in header -->
+                <xpath expr="//header" position="inside">
+                    <button name="%(invoice_extensions.action_report_custom_invoice)d" type="action" string="Custom Invoice Report" class="btn-primary" invisible="move_type not in ['out_invoice', 'out_refund']"/>
+                </xpath>
+
+                <!-- Add custom fields after the invoice date field -->
+                <xpath expr="//field[@name='invoice_date']" position="after">
+                    <field name="no_po" invisible="move_type not in ['out_invoice', 'out_refund']"/>
+                    <field name="date_po" invisible="move_type not in ['out_invoice', 'out_refund']"/>
+                </xpath>
+
+                <!-- Add shipping information in a new notebook page -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Shipping Information" invisible="move_type not in ['out_invoice', 'out_refund']">
+                        <group>
+                            <group string="Shipping Details">
+                                <field name="date_ship"/>
+                                <field name="ship_by"/>
+                            </group>
+                            <group string="Shipping Locations">
+                                <field name="ship_from"/>
+                                <field name="ship_to"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

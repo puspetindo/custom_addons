@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_deduplicate_spesification_wizard_form" model="ir.ui.view">
+        <field name="name">deduplicate.spesification.wizard.form</field>
+        <field name="model">deduplicate.spesification.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Hapus Duplikasi Spesifikasi">
+                <sheet>
+                    <!-- Alert Warning -->
+                    <div class="alert alert-warning" role="alert" invisible="duplicate_count == 0">
+                        <p>Ditemukan <field name="duplicate_count"/>
+ spesifikasi duplikat.</p>
+                        <p>Menjalankan wizard ini akan menggabungkan spesifikasi duplikat dan mengupdate semua produk yang terkait.</p>
+                    </div>
+
+                    <!-- Alert Success -->
+                    <div class="alert alert-success" role="alert" invisible="duplicate_count != 0">
+                        <p>Tidak ditemukan duplikasi spesifikasi.</p>
+                    </div>
+
+                    <!-- Log Info -->
+                    <group>
+                        <field name="log_info" widget="text" readonly="1" invisible="log_info == False"/>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button string="Hapus Duplikasi" name="deduplicate_spesification" type="object" class="btn-primary" invisible="duplicate_count == 0"/>
+                    <button string="Tutup" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_deduplicate_spesification" model="ir.actions.act_window">
+        <field name="name">Hapus Duplikasi Spesifikasi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">deduplicate.spesification.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_deduplicate_spesification_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_deduplicate_spesification" name="Hapus Duplikasi Spesifikasi" action="action_deduplicate_spesification" parent="stock.menu_product_in_config_stock" sequence="100"/>
+</odoo>

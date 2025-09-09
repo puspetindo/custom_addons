@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_bukti_bank_keluar" model="ir.actions.report">
+        <field name="name">Bukti Bank Keluar</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">vendor_payment_detail.report_bukti_transfer_template</field>
+        <field name="report_file">vendor_payment_detail.report_bukti_transfer_template</field>
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="binding_type">report</field>
+        <field name="domain">[('state', '=', 'posted'), ('move_type', '=', 'in_invoice')]</field>
+    </record>
+
+    <template id="report_bukti_transfer_template">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <div style="margin-top: 30px;">
+                        <table border="1" style="border-collapse: collapse; width: 100%;">
+                            <tbody>
+                                <tr style="border: 1px solid white;">
+                                    <!-- Kolom kiri: logo -->
+                                    <td style="width: 50%; vertical-align: middle;">
+                                        <img
+                                            t-att-src="'/wmr/static/src/img/logo_puspetindo.png'"
+                                            alt="Logo"
+                                            class="img img-fluid o_we_custom_image"
+                                            style="width: 300px; height: auto;" />
+                                    </td>
+
+                                    <!-- Kolom kanan: teks -->
+                                    <td
+                                        style="width: 50%; text-align: right; vertical-align: middle;">
+                                        <strong>No Rek: <span
+                                                t-field="doc.journal_id.bank_account_id.acc_number" />
+                                        </strong>
+
+                                        <br />
+                                        <span t-field="doc.journal_id.bank_account_id.bank_id.name" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <!-- Judul Tengah -->
+                        <h2 style="font-weight: bold; margin: 0; text-decoration: underline;">
+                            Bukti Bank Keluar
+                        </h2>
+                    </div>
+
+                    <!-- Tabel 3 kolom, 2 baris -->
+                    <table
+                        style="width: 100%; margin-top: 5px; border-collapse: collapse; border: 1px solid white;">
+                        <!-- Baris 1 -->
+                        <tr>
+                            <td style="width: 33%;"></td>
+                            <td style="width: 34%; text-align: center;"></td>
+                            <td style="width: 33%; text-align: right;"> Tgl. : <span
+                                    t-esc="doc.date.strftime('%d/%m/%Y') if doc.date else ''" />
+                            </td>
+
+                        </tr>
+                        <!-- Baris 2 -->
+                        <tr>
+                            <td></td>
+                            <td style="text-align: center; font-weight: bold;">(INTERN)</td>
+                            <td style="text-align: right;"> No. : <span t-field="doc.name" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Bagian Jumlah & Terbilang -->
+                    <table
+                        style="width:100%; border-collapse: collapse; margin-top:10px; margin-bottom:5px; border: 1px solid white;">
+                        <tbody>
+                            <tr>
+                                <td colspan="2" style="">
+                                    <strong
+                                        style="font-weight: bold; display:block; margin-bottom:5px; margin-top:5px;">
+                                        JUMLAH:
+                                    </strong>
+                                    <div
+                                        style="border: 1px solid black; padding: 5px; width:100%;">
+                                        <span
+                                            t-esc="doc.amount_total"
+                                            t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" style="">
+                                    <strong
+                                        style="font-weight: bold; display:block; margin-bottom:5px; margin-top:5px;">
+                                        TERBILANG:
+                                    </strong>
+                                    <div style="border: 1px solid black; padding: 5px;">
+                                        <span
+                                            t-esc="doc.amount_residual_terbilang.title() if doc.amount_residual_terbilang else '-'" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="">
+                                    <strong
+                                        style="font-weight: bold; display:block; margin-bottom:5px; margin-top:5px;">
+                                        KETERANGAN:</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Detail Pembayaran -->
+                    <table class="table table-bordered"
+                        style="width:100%; border: 1px solid black; border-collapse: collapse; margin-top:5px; margin-bottom:20px;">
+                        <thead>
+                            <tr>
+                                <th
+                                    style="font-weight: bold; border: 1px solid black; background-color: yellow; padding: 5px; text-align: center;">
+                                    PEMBAYARAN</th>
+                                <th
+                                    style="font-weight: bold; border: 1px solid black; background-color: yellow; padding: 5px; text-align: center;">
+                                    JUMLAH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span t-esc="doc.partner_id.name or '-'" />
+                                </td>
+
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span
+                                        t-esc="doc.amount_total"
+                                        t-options='{"widget": "monetary", "display_currency": doc.currency_id}' />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;"></td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;"></td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;"></td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;"></td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;"></td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border: 1px solid black; padding: 5px; background-color: yellow; height: 25px;">VIA
+                                    : CMS</td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border: 1px solid black; padding: 5px; background-color: yellow; height: 25px;">No.Cek
+                                    No:</td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border: 1px solid black; padding: 5px; background-color: yellow; height: 25px;">No.
+                                    Giro No:</td>
+                                <td style="border: 1px solid black; padding: 5px; height: 25px;">
+                                    <span />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="1"
+                        style="border-collapse: collapse; width: 100%; text-align: center; margin-top:20px; border: 1px solid white;">
+                        <tr>
+                            <!-- Kolom Kiri (Jabatan) -->
+                            <td style="width:25%; vertical-align: top;">
+                                <table border="1"
+                                    style="border-collapse: collapse; width: 100%; text-align: center; border: 1px solid black;">
+                                    <tr
+                                        style="background-color: lightgray; font-weight: bold; border: 1px solid black">
+                                        <td>Direktur Utama</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 40px;"></td>
+                                    </tr>
+                                    <tr
+                                        style="background-color: lightgray; font-weight: bold; border: 1px solid black;">
+                                        <td>VP Finance &amp; HR</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 40px;"></td>
+                                    </tr>
+                                    <tr
+                                        style="background-color: lightgray; font-weight: bold; border: 1px solid black;">
+                                        <td>Manager Fin &amp; Acc</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 40px;"></td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <td style="width:25%;"></td>
+                            <td style="width:25%;"></td>
+
+                            <!-- Kolom Kanan (Penerima) -->
+                            <td style="width:25%; vertical-align: top; text-align:center;">
+                                <div style="font-weight: bold; margin-bottom: 60px;"> Gresik, <span
+                                        t-esc="doc.invoice_date.strftime('%d/%m/%Y') if doc.invoice_date else ''" />
+                                </div>
+                                <div style="margin-top: 100px; font-weight: bold;">PENERIMA</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

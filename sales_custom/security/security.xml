@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Membuat grup baru untuk pengguna Sales -->
+        <record id="group_sales_custom" model="res.groups">
+            <field name="name">Sales Custom</field>
+            <field name="category_id" ref="base.module_category_sales"/>
+        </record>
+
+        <!-- Memberikan akses pada grup Sales Custom -->
+        <record id="sales_custom_access_order_information" model="ir.model.access">
+            <field name="name">access_order_information</field>
+            <field name="model_id" ref="model_sales_custom_order_information"/>
+            <field name="group_id" ref="group_sales_custom"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

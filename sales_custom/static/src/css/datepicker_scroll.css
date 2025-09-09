@@ -1,0 +1,7 @@
+/* Biar popup datepicker bisa discroll kalau tinggi kepotong */
+.datepicker {
+    max-height: 250px !important;   /* atur tinggi maksimal */
+    overflow-y: auto !important;    /* aktifkan scroll vertikal */
+    overflow-x: hidden !important;  /* cegah scroll horizontal */
+    z-index: 9999 !important;       /* pastikan selalu muncul di atas */
+}

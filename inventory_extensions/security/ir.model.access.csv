@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_dimension_user,product.dimension.user,model_product_dimension,stock.group_stock_user,1,0,0,0
+access_product_dimension_manager,product.dimension.manager,model_product_dimension,stock.group_stock_manager,1,1,1,1
+access_product_spesification_user,product.spesification.user,model_product_spesification,stock.group_stock_user,1,1,1,1
+access_product_satuan_user,access.product.satuan.user,model_product_satuan,stock.group_stock_user,1,1,1,1
+access_laporan_penerimaan_barang_all,Laporan Penerimaan Barang All,model_laporan_penerimaan_barang,,1,1,1,1
+access_laporan_penerimaan_barang_line_all,Laporan Penerimaan Barang Line All,model_laporan_penerimaan_barang_line,,1,1,1,1

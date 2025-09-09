@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Template Baris untuk Payment Detail Line -->
+        <record id="payment_detail_line_template_nilai" model="account.move.line">
+            <field name="name">Nilai / Uang Muka</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_biaya_pengiriman" model="account.move.line">
+            <field name="name">Biaya Pengiriman</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_ppn" model="account.move.line">
+            <field name="name">PPN</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_pph_psl_23" model="account.move.line">
+            <field name="name">PPh Psl 23 / Final</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_denda_keterlambatan" model="account.move.line">
+            <field name="name">Denda Keterlambatan</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_lain_lain" model="account.move.line">
+            <field name="name">Lain - lain</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_um" model="account.move.line">
+            <field name="name">UM</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+
+        <record id="payment_detail_line_template_materai" model="account.move.line">
+            <field name="name">Materai</field>
+            <field name="is_template" eval="True"/>
+            <field name="quantity">0</field>
+            <field name="price_unit">0</field>
+            <field name="account_id" ref="account.data_account_type_expenses"/>
+        </record>
+    </data>
+</odoo>

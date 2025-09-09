@@ -1,0 +1,43 @@
+<odoo>
+    <record id="view_form_list_pok" model="ir.ui.view">
+        <field name="name">list.pok.form</field>
+        <field name="model">list.pok</field>
+        <field name="arch" type="xml">
+            <form string="Detail Pekerjaan POK" class="oe_form_nocontent">
+                <sheet>
+                    <group>
+                        <field name="pok_form_id" invisible="1"/>
+                        <field name="deskripsi"/>
+                        <field name="tipe"/>
+                        <field name="kode"/>
+                        <field name="tanggal_rencana"/>
+                        <field name="target_selesai"/>
+                        <field name="tanggal_selesai"/>
+                        <field name="penjelasan"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_list_list_pok" model="ir.ui.view">
+        <field name="name">list.pok.list</field>
+        <field name="model">list.pok</field>
+        <field name="arch" type="xml">
+            <list string="Daftar Pekerjaan POK" class="oe_view_nocontent">
+                <field name="deskripsi"/>
+                <field name="tipe"/>
+                <field name="kode"/>
+                <field name="tanggal_rencana"/>
+                <field name="target_selesai"/>
+                <field name="tanggal_selesai"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_list_pok" model="ir.actions.act_window">
+        <field name="name">Detail POK</field>
+        <field name="res_model">list.pok</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

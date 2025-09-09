@@ -1,0 +1,65 @@
+<odoo>
+    <!--  Action untuk membuka Order Information  -->
+    <record id="action_order_information" model="ir.actions.act_window">
+        <field name="name">Order Information</field>
+        <field name="res_model">sales_custom.order_information</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No OI JE found. </p>
+        </field>
+    </record>
+    <!--  Action untuk membuka Form JS  -->
+    <record id="action_oi_js" model="ir.actions.act_window">
+        <field name="name">Form JS</field>
+        <field name="res_model">sales_custom.oi_js</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No OI JS found. </p>
+        </field>
+    </record>
+    <!--  Action untuk membuka Data Job Item JE  -->
+    <record id="action_job_item" model="ir.actions.act_window">
+        <field name="name">Data Job Item JE</field>
+        <field name="res_model">sales_custom.job_item</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No Item found. </p>
+        </field>
+    </record>
+    <!--  Action untuk membuka Data Job Item JS  -->
+    <record id="action_job_item_js" model="ir.actions.act_window">
+        <field name="name">Data Job Item JS</field>
+        <field name="res_model">sales_custom.job_item_js</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No Item found. </p>
+        </field>
+    </record>
+    <!--  Action untuk membuka Division  -->
+    <record id="action_scope_division" model="ir.actions.act_window">
+        <field name="name">Divisi</field>
+        <field name="res_model">sales_custom.scope_division</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No Divisionn found. </p>
+        </field>
+    </record>
+    <!--  Action untuk membuka Remarks  -->
+    <record id="action_scope_remarks" model="ir.actions.act_window">
+        <field name="name">Remarks</field>
+        <field name="res_model">sales_custom.scope_remarks</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face"> No Remarks found. </p>
+        </field>
+    </record>
+
+    <!-- Action for Order Information JS Close -->
+    <record id="action_order_information_js_close" model="ir.actions.act_window">
+        <field name="name">Close Project JS</field>
+        <field name="res_model">sales_custom.order_information_js.close</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_order_information_js_close_form"/>
+    </record>
+</odoo>

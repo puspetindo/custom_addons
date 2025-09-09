@@ -1,0 +1,94 @@
+<odoo>
+    <record id="view_order_kerja_form" model="ir.ui.view">
+        <field name="name">order.kerja.form</field>
+        <field name="model">order.kerja</field>
+        <field name="arch" type="xml">
+            <form string="Order Kerja">
+                <sheet>
+                    <group>
+                        <field name="nomor_ok" readonly="1"/>
+                        <field name="tanggal_ok" readonly="1"/>
+                        <field name="revisi" readonly="1"/>
+                    </group>
+                    <group string="Referensi Kami">
+                        <field name="referensi_nomor"/>
+                        <field name="referensi_tanggal"/>
+                        <field name="referensi_ok_no"/>
+                    </group>
+                    <group string="Penawaran Saudara">
+                        <field name="penawaran_nomor"/>
+                        <field name="penawaran_tanggal"/>
+                    </group>
+                    <group string="Syarat-Syarat Utama">
+                        <field name="syarat_pembayaran"/>
+                        <field name="lokasi_penyerahan"/>
+                        <field name="syarat_penyerahan"/>
+                        <field name="tanggal_batas_penyerahan"/>
+                    </group>
+                    <group string="Alamat Penawar">
+                        <field name="kepada_nama"/>
+                        <field name="kepada_alamat"/>
+                        <field name="kepada_kontak"/>
+                        <field name="kepada_email"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Detail Pekerjaan">
+                            <field name="detail_ids" widget="one2many_list">
+                                <list>
+                                    <field name="revisi"/>
+                                    <field name="jenis_pekerjaan"/>
+                                    <field name="uraian_pekerjaan"/>
+                                    <field name="kel_biaya"/>
+                                    <field name="cost_c"/>
+                                    <field name="pok_with_cost" string="POK"/>
+                                    <field name="qty"/>
+                                    <field name="satuan"/>
+                                    <field name="harga_satuan"/>
+                                    <field name="jumlah_total" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <group>
+                        <field name="sub_total" readonly="1"/>
+                        <field name="sub_total_terbilang" readonly="1"/>
+                    </group>
+
+                    <group string="Tanda Tangan">
+                        <field name="ttd_nama"></field>
+                        <field name="ttd_jabatan"></field>
+                        <field name="sign" widget="signature"></field>
+                    </group>
+
+                    <group string="Catatan">
+                        <field name="note"></field>
+                    </group>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_order_kerja_tree" model="ir.ui.view">
+        <field name="name">order.kerja.list</field>
+        <field name="model">order.kerja</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nomor_ok"/>
+                <field name="tanggal_ok"/>
+                <field name="kepada_nama"/>
+                <field name="referensi_nomor"/>
+                <field name="sub_total"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_order_kerja" model="ir.actions.act_window">
+        <field name="name">Order Kerja</field>
+        <field name="res_model">order.kerja</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

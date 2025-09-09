@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_oi_js_confirm_form" model="ir.ui.view">
+        <field name="name">sales_custom.oi_js.confirm.form</field>
+        <field name="model">sales_custom.oi_js.confirm</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Revision">
+                <group>
+                    <field name="order_id" invisible="1"/>
+                    <p>Are you sure you want to revise this Order Information JS?</p>
+                </group>
+                <footer>
+                    <button name="action_confirm" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

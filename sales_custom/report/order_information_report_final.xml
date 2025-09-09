@@ -1,0 +1,38 @@
+<odoo>
+  <template id="order_information_report_template">
+    <t t-call="web.html_container">
+      <t t-call="web.basic_layout">
+        <div class="page" style="font-family: Arial, sans-serif; font-size: 12px; width: 210mm; height: 297mm; margin: auto; padding: 10mm; box-sizing: border-box;">
+
+          <!-- HEADER -->
+          <div style="display: flex; justify-content: space-between; align-items: left;">
+                  <img t-att-src="'/sales_custom/static/src/image/logo.png'" style="height: 75px; width: 150px" />
+                  <h2 style="text-align: center; font-weight: bold;">ORDER INFORMATION</h2>
+          </div>
+
+          <!-- SCOPE OF WORK & SUPPLY -->
+          <div style="font-weight: bold; font-size: 16px;">3. SCOPE OF WORK &amp; SUPPLY</div>
+          <table style="width: 100%; border-collapse: collapse; border: 1px solid black; margin-bottom: 10px;">
+            <thead>
+              <tr>
+                <th style="border: 1px solid black; width: 20%; font-weight: bold; padding-left: 5px;">DESCRIPTION</th>
+                <th style="border: 1px solid black; width: 60%; font-weight: bold; padding-left: 5px;">DETAIL SCOPE OF WORK AND SUPPLY</th>
+                <th style="border: 1px solid black; width: 20%; font-weight: bold; padding-left: 5px;">Remarks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="docs.scope_division_ids" t-as="scope">
+                <tr t-att-style="'background-color: #e6f3ff;' if scope.detail_scope else 'background-color: white;'">
+                  <td style="border: 1px solid black; padding-left: 5px;"><span t-field="scope.remarks.name"/></td>
+                  <td style="border: 1px solid black; padding-left: 5px;"><span t-field="scope.detail_scope"/></td>
+                  <td style="border: 1px solid black; padding-left: 5px;"><span t-field="scope.division"/></td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+
+        </div>
+      </t>
+    </t>
+  </template>
+</odoo>

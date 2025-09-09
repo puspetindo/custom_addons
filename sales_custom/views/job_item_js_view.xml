@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Form for Job Item JS -->
+        <record id="view_job_item_js_form" model="ir.ui.view">
+            <field name="name">Job Item JS Form</field>
+            <field name="model">sales_custom.job_item_js</field>
+            <field name="arch" type="xml">
+                <form string="Job Item JS">
+                    <sheet>
+                        <group>
+                            <field name="item_no"/>
+                            <field name="name"/>
+                            <!-- <field name="number"/> -->
+                            <field name="material"/>
+                            <field name="weight_ton"/>
+                            <field name="qty"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- List for Job Item JS -->
+        <record id="view_job_item_js_list" model="ir.ui.view">
+            <field name="name">Job Item JS List</field>
+            <field name="model">sales_custom.job_item_js</field>
+            <field name="arch" type="xml">
+                <list string="Job Items JS">
+                    <field name="sequence" readonly="1"/>
+                    <field name="item_no"/>
+                    <field name="name"/>
+                    <!-- <field name="number"/> -->
+                    <field name="material"/>
+                    <field name="weight_ton"/>
+                    <field name="qty"/>
+                </list>
+            </field>
+        </record>
+
+    </data>
+</odoo>

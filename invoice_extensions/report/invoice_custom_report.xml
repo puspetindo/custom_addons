@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_style">
+            <style>
+                .info-box {
+                margin-bottom: 4px;
+                white-space: nowrap;
+                }
+                .label-box {
+                display: inline-block;
+                width: 150px;
+                font-weight: bold;
+                }
+                .table-header {
+                background-color: #f2f2f2;
+                font-weight: bold;
+                text-align: center;
+                }
+                .table-cell {
+                text-align: left;
+                padding: 5px;
+                }
+                .right-align {
+                text-align: right;
+                }
+                .center-align {
+                text-align: center;
+                }
+                .page {
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                padding: 20px;
+                }
+                table {
+                border-collapse: collapse;
+                width: 100%;
+                }
+                td, th {
+                border: 1px solid black;
+                padding: 5px;
+                }
+                .no-border {
+                border: none;
+                }
+                .header-logo {
+                font-size: 16px;
+                font-weight: bold;
+                color: #003366;
+                }
+                .footer-bar {
+                height: 10px;
+                background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff,
+                #0000ff, #ff00ff);
+                margin-top: 20px;
+                }
+            </style>
+        </template>
+
+        <template id="report_invoice_template">
+            <t t-call="web.basic_layout">
+                <t t-call="invoice_extensions.report_invoice_style" />
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <!-- Header with Logo and Title -->
+                        <table style="border: 1px solid white;">
+                            <tr>
+                                <td>
+                                    <img
+                                        t-att-src="'/wmr/static/src/img/logo_puspetindo.png'"
+                                        alt="Logo" class="company-logo"
+                                        style="width: 300px; height: auto;" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span style="font-size: 20px; font-weight: bold;">
+                                        I N V O I C E
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- Recipient and Date Table -->
+                        <table width="100%" style="margin-top: 20px;">
+                            <tr>
+                                <td width="50%" valign="top">
+                                    <div class="info-box">
+                                        <span>To :</span>
+                                    </div>
+                                    <div
+                                        t-field="o.partner_id.name" />
+                                    <div
+                                        t-field="o.partner_id.street" />
+                                    <div
+                                        t-field="o.partner_id.street2" />
+                                    <div
+                                        t-field="o.partner_id.city" />
+                                    <div
+                                        t-field="o.partner_id.state_id.name" /> - <span
+                                        t-field="o.partner_id.zip" />
+                                </td>
+                                <td width="50%" valign="top">
+                                    <div class="info-box">
+                                        <span class="label-box">Invoice Date :</span>
+                                        <span t-field="o.invoice_date"
+                                            t-options='{"format": "d MMMM y"}' />
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">Invoice No. :</span>
+                                        <span t-field="o.name" />
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">PO No. :</span>
+                                        <span t-field="o.ref" />
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">PO Date :</span>
+                                        <span t-field="o.date_order"
+                                            t-options='{"format": "d MMMM y"}' />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Shipment Details -->
+                        <table width="100%" style="margin-top: 20px;">
+                            <tr>
+                                <td width="50%">
+                                    <div class="info-box">
+                                        <span class="label-box">Date of Shipment :</span>
+                                        <span t-field="o.date_delivery"
+                                            t-options='{"format": "d MMMM y"}' />
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">Shipped by :</span>
+                                        <span t-field="o.carrier_id.name" />
+                                    </div>
+                                </td>
+                                <td width="50%">
+                                    <div class="info-box">
+                                        <span class="label-box">Shipped from :</span>
+                                        <span t-field="o.warehouse_id.name" />
+                                    </div>
+                                    <div class="info-box">
+                                        <span class="label-box">Destination :</span>
+                                        <span t-field="o.partner_shipping_id.name" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Debit Account Note -->
+                        <div style="margin-top: 10px; font-weight: bold;">
+                            We debit your account as follow
+                        </div>
+
+                        <!-- Items Table -->
+                        <table width="100%" style="margin-top: 10px;">
+                            <tr class="table-header">
+                                <td class="center-align" width="5%">NO</td>
+                                <td class="center-align" width="10%">QTY</td>
+                                <td class="center-align" width="50%">DESCRIPTION</td>
+                                <td class="center-align" width="20%">PRICE</td>
+                                <td class="center-align" width="15%">AMOUNT</td>
+                            </tr>
+                            <tr>
+                                <td class="center-align">1</td>
+                                <td class="center-align">1</td>
+                                <td class="table-cell">Jasa Perbaikan Primary &amp; Secondary
+                                    Crusher House Cladding</td>
+                                <td class="right-align">-</td>
+                                <td class="right-align">-</td>
+                            </tr>
+                            <tr>
+                                <td class="center-align">2</td>
+                                <td class="center-align">1</td>
+                                <td class="table-cell">30% of PO Price</td>
+                                <td class="right-align">-</td>
+                                <td class="right-align">-</td>
+                            </tr>
+                            <tr>
+                                <td class="center-align">3</td>
+                                <td class="center-align">1</td>
+                                <td class="table-cell">Progress Pekerjaan 40.23%</td>
+                                <td class="right-align">-</td>
+                                <td class="right-align">Rp. 3,397,984,120.00</td>
+                            </tr>
+                            <tr>
+                                <td class="center-align">4</td>
+                                <td class="center-align">1</td>
+                                <td class="table-cell">Pajak Pertambahan Nilai 11 %</td>
+                                <td class="right-align">-</td>
+                                <td class="right-align">Rp. 373,778,253.00</td>
+                            </tr>
+                            <tr>
+                                <td class="center-align" colspan="4">
+                                    <strong>Says : Tiga milyar tujuh ratus tujuh puluh satu juta
+                                        tujuh ratus tujuh puluh delapan ribu dua ratus tiga puluh
+                                        tujuh rupiah</strong>
+                                </td>
+                                <td class="right-align">
+                                    <strong>Rp. 3,771,778,237.00</strong>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Signature -->
+                        <table width="100%" class="no-border"
+                            style="margin-top: 20px; vertical-align: top;">
+                            <tr>
+                                <td width="50%"
+                                    style="border: 1px solid white; padding: 10px; vertical-align: top;">
+                                    <div>
+                                        Please remit into our account :
+                                    </div>
+                                    <div style="font-weight: bold; padding-top: 5px;">
+                                        <span t-field="o.company_id.name" />
+                                    </div>
+                                    <div> Account No. <span
+                                            t-field="o.company_id.bank_ids[0].acc_number" /> with, </div>
+                                    <div> SWIFT Code <span
+                                            t-field="o.company_id.bank_ids[0].bank_bic" />
+                                    </div>
+                                    <div>
+                                        <span t-field="o.company_id.bank_ids[0].bank_id.name" />, <span
+                                            t-field="o.company_id.bank_ids[0].bank_name" />
+                                    </div>
+                                    <div>
+                                        <span t-field="o.company_id.bank_ids[0].bank_city" /> - <span
+                                            t-field="o.company_id.bank_ids[0].bank_country_id.name" />
+                                    </div>
+                                </td>
+
+                                <td width="50%" height="30px"
+                                    style="border: 1px solid white; padding: 10px; vertical-align: top; text-align: left;">
+                                    <span t-field="o.company_id.name" />
+                                    <div style="height: 60px;">
+                                    </div>
+                                    <div
+                                        style="text-decoration: underline;">
+                                        <span t-field="o.user_id.name" />
+                                    </div>
+                                    <div>
+                                        <span t-field="o.user_id.function" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Footer Notes -->
+                        <div style="margin-top: 20px; font-size: 12px; text-align: center;">
+                            <span t-field="o.company_id.name" /><br />
+                            <span
+                                t-field="o.company_id.street" /> <span t-field="o.company_id.street2" /><br />
+                            <span
+                                t-field="o.company_id.city" />, <span
+                                t-field="o.company_id.state_id.name" /> <span
+                                t-field="o.company_id.zip" /> - <span
+                                t-field="o.company_id.country_id.name" /><br /> Telp: <span
+                                t-field="o.company_id.phone" /> Fax: <span
+                                t-field="o.company_id.fax" /> Email: <span
+                                t-field="o.company_id.email" /> Website: <span
+                                t-field="o.company_id.website" />
+                        </div>
+
+                        <!-- Colorful Footer Bar -->
+                        <div class="footer-bar"></div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
