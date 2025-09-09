@@ -2,7 +2,7 @@
 
 ## Tujuan Modul
 
-Modul Vendor Payment Detail dirancang untuk mengintegrasikan sistem perincian pembayaran dengan vendor bill dalam satu model terpadu. Modul ini menyederhanakan proses pembayaran vendor dengan menggabungkan informasi pembayaran, dokumen pendukung, dan approval workflow dalam satu interface yang seamless.
+Modul Vendor Payment Detail dirancang untuk mengintegrasikan sistem perincian pembayaran custom modul sebelumnya dengan vendor bill dalam satu model terintegrasi. Modul ini menyederhanakan proses pembayaran vendor dengan menggabungkan informasi pembayaran, dokumen pendukung, dan approval workflow dalam satu interface yang seamless.
 
 ### Fitur Utama:
 

@@ -12,7 +12,7 @@
                                         <!-- Kolom kiri: logo -->
                                         <td style="width: 50%; vertical-align: middle;">
                                             <img
-                                                t-att-src="'wmr\static\src\img\logo_puspetindo.png'"
+                                                t-att-src="'/wmr/static/src/img/logo_puspetindo.png'"
                                                 alt="Logo"
                                                 class="img img-fluid o_we_custom_image"
                                                 style="width: 300px; height: auto;" />
@@ -22,7 +22,7 @@
                                         <td
                                             style="width: 50%; text-align: right; vertical-align: middle;">
                                             <strong>No Rek: <span
-                                                    t-field="o.recipient_bank_id.acc_number" />
+                                                t-field="o.recipient_bank_id.acc_number" />
                                             </strong>
 
                                             <br />
