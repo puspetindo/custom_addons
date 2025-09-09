@@ -54,10 +54,6 @@ Folder `custom_addons` berisi kumpulan modul-modul kustom yang dikembangkan untu
 5. Konfigurasi modul melalui menu pengaturan masing-masing modul.
 6. Lakukan testing dan verifikasi fungsi modul setelah instalasi.
 
-## Kontak dan Support
-
-Untuk dukungan teknis dan pengembangan lebih lanjut, silakan hubungi tim pengembang atau administrator sistem.
-
----
-
+## Informasi Tambahan
 Dokumentasi ini dibuat untuk memudahkan pemahaman dan pengelolaan seluruh modul kustom yang ada di folder `custom_addons`.
+
